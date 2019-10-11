@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+bandit = "*"
+pyflakes = "*"
+mypy = "*"
+pydocstyle = "*"
+black = "==19.3b0"
+pylint = "*"
+pycodestyle = "*"
+
+[packages]
+facebook-sdk = "*"
+
+[requires]
+python_version = "3.7"
