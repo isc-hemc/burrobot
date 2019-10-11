@@ -1,0 +1,107 @@
+% based on Harish Bhanderi's PhD/MPhil template, then Uni Cambridge
+% http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/ThesisStyle/
+% corrected and extended in 2007 by Jakob Suckale, then MPI-iCBG PhD programme
+% and made available through OpenWetWare.org - the free biology wiki
+% forked from https://github.com/Tepexic/Tesis-UNAM on July 2017
+% Modifications made by Carlos David Hernández Martínez (2018-2019) 
+% Under GNU License v3
+
+\documentclass[oneside,12pt]{Latex/Classes/thesisUMSNH}
+\usepackage[square, sort, numbers]{natbib}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{J}[1]{>{\arraybackslash}m{#1}}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{listingsutf8}
+\usepackage{color}
+\usepackage{mathptmx}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+\lstset{
+	style=mystyle,
+	inputencoding=utf8/latin1
+}
+
+\include{Latex/Macros/MacroFile1}
+
+%%%%%%%%
+% DATA %
+%%%%%%%%
+\title{Burrobot}
+\author{Carlos David Hernández Martínez \\ José Ricardo López García} 
+\facultad{Escuela Superior de Cómputo}
+\degree{Ingeniería en Sistemas Computacionales}
+\director{M. en C. Ivan Giovanny Mosso García \quad \quad \quad M.C.C Pabel Carrillo Mendoza}
+\degreedate{11 de Noviembre del 2019}
+\lugar{Ciudad de México}
+
+\portadatrue
+
+\keywords{Chatbot, Inteligencia Artificial, Procesamiento del Lenguaje Natural, Mensajería instantánea.}
+\subject{tema_1,tema_2} 
+
+%%%%%%%%%%%%%%
+% COVER PAGE %
+%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%
+% PROLOGUE %
+%%%%%%%%%%%%
+\frontmatter
+
+%%%%%%%%%
+% INDEX %
+%%%%%%%%%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\tableofcontents
+\listoffigures
+\listoftables
+
+%%%%%%%%%%%
+% CONTENT %
+%%%%%%%%%%%
+\mainmatter
+\def\baselinestretch{1.5}
+
+%%%%%%%%%%%%
+% APPENDIX %
+%%%%%%%%%%%%
+\appendix
+
+%%%%%%%%%%%%%%
+% REFERENCES %
+%%%%%%%%%%%%%%
+\bibliographystyle{ieeetr}
+
+\end{document}
