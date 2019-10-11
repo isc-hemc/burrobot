@@ -11,6 +11,7 @@ pydocstyle = "*"
 black = "==19.3b0"
 pylint = "*"
 pycodestyle = "*"
+pre-commit = "*"
 
 [packages]
 facebook-sdk = "*"
