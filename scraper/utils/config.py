@@ -1,4 +1,4 @@
-"""Configuration
+"""config.
 
 Load the environment variables to be used in the system.
 
@@ -10,4 +10,5 @@ ACCESS_TOKEN: str
 """
 import os
 
-ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN", "")
+ACCESS_TOKEN: str = os.environ.get("ACCESS_TOKEN", "")
+URL: str = "mongo"

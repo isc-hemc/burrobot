@@ -1,4 +1,4 @@
-"""Scraper.
+"""miner.
 
 The purpose of this module it's only to mine Facebook Messenger conversations
 from a user profile or a creator page. GET request are only supported by the
@@ -14,7 +14,7 @@ from utils.custom_classes import Conversation, Me, Message
 
 
 class Miner:
-    """DataMiner.
+    """Miner.
 
     Helper class to get information from a user profile or a facebook page.
 
@@ -72,7 +72,8 @@ class Miner:
 
         Makes a GET request to fetch an object from the graph, this method
         doesn't return all the data from the graph, instead the response comes
-        with a cursor to retrieve the next set of data.
+        with a cursor to retrieve the next set of data if there is more than
+        one element.
 
         Parameters
         ----------

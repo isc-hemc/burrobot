@@ -1,4 +1,4 @@
-"""Custom Classes.
+"""custom classes.
 
 Data classes that pretends to make raw data manageable.
 
