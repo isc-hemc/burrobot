@@ -18,8 +18,9 @@ from typing import List, Union
 
 from miner.miner import Miner
 from store.file_system import FileSystem
+from store.mongo import Mongo
 from utils.compere import compere
-from utils.config import ACCESS_TOKEN, URL
+from utils.config import ACCESS_TOKEN
 from utils.custom_classes import Me
 from utils.usage import usage
 
@@ -48,16 +49,17 @@ def run():
     # TODO(davestring/JoseRicardoL): OPTS['q'] isn't been used.
     # TODO(davestring/JoseRicardoL): OPTS['t'] isn't been used.
     miner: Miner = Miner(access_token=ACCESS_TOKEN)
-    store: Union[FileSystem, None] = FileSystem(OPTS["output_path"])
+    store: Union[FileSystem, Mongo] = FileSystem(OPTS["output_path"])
     if OPTS["db"]:
-        # TODO(davestring): Implements connection to mongo and store data in
-        # a mongo database.
-        pass
+        store = Mongo("conversations")
     me: Me = miner.me()
     for con in miner.get_all(id_=me.id, conn_name="conversations"):
         fields: str = "messages{message,from,created_time,to}"
         dataset = miner.get(id_=con.id, fields=fields)["messages"]["data"]
         for data in dataset:
+            if OPTS["db"]:
+                store.upsert(doc=data)
+                continue
             store.write(
                 data=data,
                 file_name=data["created_time"],
@@ -112,7 +114,7 @@ def prepare(argv: List):
     if OPTS["all_data"]:
         print("\nRetrieving all conversations.\n")
     if OPTS["db"]:
-        print(f"Retrieved data will be stored in {URL}.\n")
+        print(f"Retrieved data will be stored in mongo.\n")
     else:
         print(f"Retrieved data will be stored in {OPTS['output_path']}.\n")
 
