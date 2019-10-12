@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  mongodb:
+    build: ./mongo
+    image: burrobot-mongodb:1.0
+    container_name: burrobot-mongodb
+    env_file:
+      - ./mongo/variables.env
+    networks:
+      burrobot-network:
+        aliases:
+          - burrobot-mongodb
+    ports:
+      - "14000:27017"
+    volumes:
+      - type: volume
+        source: burrobot-mongodb
+        target: /data/db
+    healthcheck:
+      test: "[ `echo 'db.runCommand(\"ping\").ok' | mongo localhost/example-database --quiet` ] && echo 0 || echo 1"
+      interval: 5s
+      start_period: 10s
+      timeout: 4s
+      retries: 3
+
+networks:
+  burrobot-network:
+    name: burrobot-network
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 168.10.10.0/24
+
+volumes:
+  burrobot-mongodb:
+    name: burrobot-mongodb
