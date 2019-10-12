@@ -412,7 +412,7 @@ TSWLatexianTemp*
 # VSCode #
 ##########
 
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -467,3 +467,10 @@ Temporary Items
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+
+################
+# Scraper Data #
+################
+*scraper/data/*
+!scraper/data/.gitkeep
