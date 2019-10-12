@@ -35,7 +35,7 @@ def usage(exit_code: int = 0):
                 (
                     "\t\tIn case that your Graph API app has reach its request"
                     " limit, define a timeout to continue the download,"
-                    " default is 5 minutes."
+                    " this value must come in minutes. The default is 5."
                 ),
                 "\t-d, --database=<bool>",
                 (

@@ -6,6 +6,7 @@ This module implements a **Facebook Messenger Scraper** to download messages fro
 
 - [Dependencies](#dependencies)
 - [Configuration](#configuration)
+- [Run](#run)
 - [Appendices](#Appendices)
 - [Authors](#Authors)
 
@@ -36,6 +37,21 @@ Then, here is a list of the variables needed for the correct execution of this p
 | Variable               | Value                  | Description                                 |
 |------------------------|------------------------|---------------------------------------------|
 | ACCESS_TOKEN           | ax23sF&4z$r4%g         | Access token for your Graph API application |
+
+## Run
+
+This script comes with a command line arguments that can be passed to improve the execution, here is a list with a description of them:
+
+- -q, --quantity: Number of conversations to download, default is all.
+- -t, --timeout: In case that your Graph API app has reach its request limit, define a timeout to continue the download, this value must come in minutes. The default is 5.
+- -d, --database: Stores the retrieved information in a Mongo Database. If there's a db available, value should be 1 (True) otherwise 0 (False). The default value is False.
+- -h, --help: Script usage description.
+
+For more information about the command line arguments, run:
+
+```bash
+pipenv run python main.py --help
+```
 
 ## Appendices
 

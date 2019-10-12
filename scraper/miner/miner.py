@@ -89,18 +89,18 @@ class Miner:
         """
         return self.api.get_object(id=id_, fields=fields)
 
-    def get_all(self, id_: str, connection_name: str) -> Generator:
+    def get_all(self, id_: str, conn_name: str) -> Generator:
         """GET all Request.
 
         Iterates over all pages returned by a GraphAPI.get_connections call and
         yields the individual items. This request is describes in the form:
-        "https://graph.facebook.com/v4.0/{id}/{connection_name}?access_token=access_token"
+        "https://graph.facebook.com/{id}/{conn_name}?access_token=access_token"
 
         Parameters
         ----------
         id_: str
             ID in a format similar to t_000000000000000 or 'me'.
-        connection_name: str
+        conn_name: str
             Specifies the connection or edge between objects. By the moment
             the only supported connections are 'conversations' and 'messages'.
 
@@ -109,11 +109,8 @@ class Miner:
         Generator
 
         """
-        # TODO(davestring): By the moment, only supports connection_name type
-        # 'conversations' and 'messages', search for a way to make this method
-        # generic.
-        for el in self.api.get_all_connections(id_, connection_name):
-            if connection_name == "conversations":
+        for el in self.api.get_all_connections(id_, conn_name):
+            if conn_name == "conversations":
                 yield Conversation(**el)
-            if connection_name == "messages":
+            if conn_name == "messages":
                 yield Message(**el)

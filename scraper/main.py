@@ -14,21 +14,25 @@ check the README.md in this folder or type in the command line:
 import getopt
 import os
 import sys
-from typing import List
+from typing import List, Union
 
+from miner.miner import Miner
+from store.file_system import FileSystem
 from utils.compere import compere
-from utils.config import URL
+from utils.config import ACCESS_TOKEN, URL
+from utils.custom_classes import Me
 from utils.usage import usage
 
 
 PATH = os.path.dirname(os.path.abspath(__file__))
 
+
 OPTS = {
     "q": 0,
-    "t": 5,
+    "t": 5 * 60,
     "all_data": True,
     "output_path": f"{PATH}/data/",
-    "db": False
+    "db": False,
 }
 
 
@@ -39,7 +43,26 @@ def run():
     retrieval.
 
     """
-    pass
+    # TODO(davestring/JoseRicardoL): Improve this function.
+    # TODO(davestring/JoseRicardoL): OPTS['all_data'] isn't been used.
+    # TODO(davestring/JoseRicardoL): OPTS['q'] isn't been used.
+    # TODO(davestring/JoseRicardoL): OPTS['t'] isn't been used.
+    miner: Miner = Miner(access_token=ACCESS_TOKEN)
+    store: Union[FileSystem, None] = FileSystem(OPTS["output_path"])
+    if OPTS["db"]:
+        # TODO(davestring): Implements connection to mongo and store data in
+        # a mongo database.
+        pass
+    me: Me = miner.me()
+    for con in miner.get_all(id_=me.id, conn_name="conversations"):
+        fields: str = "messages{message,from,created_time,to}"
+        dataset = miner.get(id_=con.id, fields=fields)["messages"]["data"]
+        for data in dataset:
+            store.write(
+                data=data,
+                file_name=data["created_time"],
+                nested_dirs=con.id,
+            )
 
 
 def prepare(argv: List):
@@ -81,17 +104,19 @@ def prepare(argv: List):
             timeout: int = int(arg)
             if timeout < 1:
                 raise ValueError("Timeout should be greater than 0")
-            OPTS["t"] = timeout
+            OPTS["t"] = timeout * 60
         elif opt in ("-d", "--database"):
             db: bool = bool(int(arg))
             OPTS["db"] = db
 
     if OPTS["all_data"]:
-        print("\nRetrieving all conversations.")
+        print("\nRetrieving all conversations.\n")
     if OPTS["db"]:
-        print(f"\nRetrieved data will be stored in {URL}.")
+        print(f"Retrieved data will be stored in {URL}.\n")
     else:
-        print(f"\nRetrieved data will be stored in {OPTS['output_path']}.")
+        print(f"Retrieved data will be stored in {OPTS['output_path']}.\n")
+
+    run()
 
 
 if __name__ == "__main__":
