@@ -109,6 +109,8 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+mongodb.env
+mysqldb.env
 
 # Spyder project settings
 .spyderproject

@@ -3,10 +3,10 @@ version: "3.7"
 services:
   mongodb:
     build: ./mongo
-    image: burrobot-mongodb:1.0
     container_name: burrobot-mongodb
+    image: burrobot-mongodb:1.0
     env_file:
-      - ./mongo/variables.env
+      - ./mongo/mongodb.env
     networks:
       burrobot-network:
         aliases:
@@ -24,6 +24,29 @@ services:
       timeout: 4s
       retries: 3
 
+  mysqldb:
+    build: ./mysql
+    container_name: burrobot-mysqldb
+    image: burrobot-mysqldb:1.0
+    env_file:
+      - ./mysql/mysqldb.env
+    networks:
+      burrobot-network:
+        aliases:
+          - burrobot-mysqldb
+    ports:
+      - "14001:3306"
+    volumes:
+      - type: volume
+        source: burrobot-mysqldb
+        target: /data/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      start_period: 10s
+      timeout: 4s
+      retries: 3
+
 networks:
   burrobot-network:
     name: burrobot-network
@@ -35,3 +58,5 @@ networks:
 volumes:
   burrobot-mongodb:
     name: burrobot-mongodb
+  burrobot-mysqldb:
+    name: burrobot-mysqldb
