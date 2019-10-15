@@ -51,12 +51,13 @@ def run():
     miner: Miner = Miner(access_token=ACCESS_TOKEN)
     store: Union[FileSystem, Mongo] = FileSystem(OPTS["output_path"])
     if OPTS["db"]:
-        store = Mongo("conversations")
+        store = Mongo("conversations-ESCOM")
     me: Me = miner.me()
     for con in miner.get_all(id_=me.id, conn_name="conversations"):
         fields: str = "messages{message,from,created_time,to}"
         dataset = miner.get(id_=con.id, fields=fields)["messages"]["data"]
         for data in dataset:
+            data["conversation_id"] = con.id
             if OPTS["db"]:
                 store.upsert(doc=data)
                 continue
