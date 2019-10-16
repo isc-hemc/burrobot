@@ -62,9 +62,7 @@ def run():
                 store.upsert(doc=data)
                 continue
             store.write(
-                data=data,
-                file_name=data["created_time"],
-                nested_dirs=con.id,
+                data=data, file_name=data["created_time"], nested_dirs=con.id
             )
 
 
