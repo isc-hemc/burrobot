@@ -79,6 +79,23 @@ To have all the development environment automated create a settings.json, tasks.
 }
 ```
 
+### Appendix B - Configure and run pre-commit
+
+Git hook scripts are useful for identifying simple issues before submission to code review. This module has a *pre-commit-config.yml* file that helps us with this task, so, in order to install the git hooks, open a terminal in this module and type the following commands:
+
+> Install the git hook scripts
+
+```bash
+pipenv install --dev
+pipenv run pre-commit install
+```
+
+> Run against all files
+
+```bash
+pipenv run pre-commit run --all-files
+```
+
 ## Authors
 
 ***David Martinez** - [Davestring](https://github.com/Davestring)
