@@ -14,7 +14,8 @@ import os
 
 from typing import Dict
 
-from nlpmodels.text_processing import Processor
+from db.mysql import SQL
+from nlpmodels.text_processing import PreProcessor
 
 
 PATH = os.path.dirname(os.path.abspath(__file__))
