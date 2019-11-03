@@ -10,12 +10,68 @@ information check the README.md in this folder or type in the command line:
     > pipenv run python main.py --help
 
 """
+import getopt
 import os
+import sys
+from typing import List
 
-from typing import Dict
-
-from db.mysql import SQL
-from nlpmodels.text_processing import PreProcessor
+from tasks.tasks import preprocess
+from utils.compere import compere
+from utils.usage import usage
 
 
 PATH = os.path.dirname(os.path.abspath(__file__))
+
+
+OPTS = {"p": False, "c": "conversations-ESCOM", "t": False}
+
+
+def run():
+    """Run.
+
+    Given the prompt arguments, will perform different tasks.
+
+    """
+    if OPTS["p"]:
+        preprocess(opts=OPTS, path=PATH)
+    if OPTS["t"]:
+        pass
+
+
+def prepare(argv: List):
+    """Prepare.
+
+    Takes the arguments from the command line to prepare the information
+    retrieval.
+
+    Parameters
+    ----------
+    argv: List
+        Command line arguments.
+
+    """
+    compere()
+    try:
+        args: List = ["preprocess=", "collection=", "topics=", "help"]
+        opts, args = getopt.getopt(argv, "p:c:t:h", args)
+    except getopt.GetoptError:
+        usage(2)
+
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            usage()
+        elif opt in ("-p", "--preprocess"):
+            p: bool = bool(int(arg))
+            OPTS["p"] = p
+        elif opt in ("-c", "--collection"):
+            c: str = arg
+            OPTS["c"] = c
+        elif opt in ("-t", "--topics"):
+            t: bool = bool(int(arg))
+            OPTS["t"] = t
+
+    run()
+
+
+if __name__ == "__main__":
+    prepare(sys.argv[1:])

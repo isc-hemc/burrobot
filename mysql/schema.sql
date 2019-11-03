@@ -53,7 +53,7 @@ CREATE TABLE `Message` (
   `no_stopwords_with_lemmas_msg` text,
   `with_stopwords_no_lemmas_msg` text,
   `with_stopwords_with_lemmas_msg` text,
-  `created_time` date NOT NULL,
+  `created_time` varchar(50) DEFAULT NULL,
   `conversation_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_msg_1` (`conversation_id`),
@@ -79,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-31  5:48:57
+-- Dump completed on 2019-11-03  6:10:55
