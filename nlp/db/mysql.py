@@ -4,7 +4,7 @@ Connects to a MySQL database using a client-side representation of a cluster.
 
 """
 import time
-from typing import Callable, Dict, List
+from typing import Dict, List, Union
 
 import pymysql
 
@@ -97,8 +97,9 @@ class SQL(object):
         table: str,
         cols: List = [],
         search_query: Dict = {},
+        first: bool = False,
         fetch_all: bool = True,
-    ) -> List:
+    ) -> Union[Dict, List]:
         """Find.
 
         Search for a registry in the database.
@@ -112,6 +113,8 @@ class SQL(object):
             select all fields (*).
         search_query: Dict
             From the rows retrieved performs a WHERE statement to find matches.
+        first: bool
+            Retrieve the first element in the dataset.
         fetch_all: bool
             Retrieve all the elements of a table.
 
@@ -134,6 +137,8 @@ class SQL(object):
                 query += f"`{key}`='{value}' AND "
             query = query[:-5]
         self.cursor.execute(query)
+        if first:
+            return self.cursor.fetchone()
         return self.cursor.fetchall()
 
     def upsert(self, table: str, registry: Dict, attempts: int = 0):
@@ -164,21 +169,21 @@ class SQL(object):
             _id = registry.pop("id")
             query = f"UPDATE `{table}` SET "
             for key, value in registry.items():
-                query += f"`{key}`='{value}'"
-            query += f" WHERE `id`={_id}"
+                query += f"`{key}`='{value}' "
+            query += f"WHERE `id`={_id}"
         else:
             query = f"INSERT INTO `{table}` ("
             keys, values = zip(*registry.items())
             for key in keys:
-                query += f"`{key}`"
-            query += f") VALUES ("
+                query += f"`{key}`,"
+            query = f"{query[:-1]}) VALUES ("
             for value in values:
                 query += f"'{value}',"
             query = f"{query[:-1]})"
         try:
             self.cursor.execute(query)
             self.conn.commit()
-        except Exception:
+        except Exception as e:
             self.upsert(table, registry, attempts + 1)
 
     def reconnect(self):

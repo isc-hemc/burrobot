@@ -11,7 +11,12 @@ import re
 
 from nltk import word_tokenize
 
-from utils import resources as r
+from utils.resources import (
+    Encodings,
+    load_encodings,
+    load_lemmas,
+    load_stopwords,
+)
 
 
 class PreProcessor:
@@ -23,7 +28,7 @@ class PreProcessor:
 
     Attributes
     ----------
-    encoders: r.Encodings
+    encoders: Encodings
         Class that stores the encoding information of the lemmas and stopwords
         files.
     path: str
@@ -47,7 +52,7 @@ class PreProcessor:
 
         """
         self.path: str = path
-        self.encoders: r.Encodings = r.load_encodings(path=self.path)
+        self.encoders: Encodings = load_encodings(path=self.path)
         self.lemmas: Dict = self._lemmas
         self.stopwords: List = self._stopwords
 
@@ -63,7 +68,7 @@ class PreProcessor:
             Lemmas dictionary.
 
         """
-        return r.load_lemmas(path=self.path, encoder=self.encoders.lemmas)
+        return load_lemmas(path=self.path, encoder=self.encoders.lemmas)
 
     @property
     def _stopwords(self) -> List:
@@ -77,9 +82,7 @@ class PreProcessor:
             Stopwords list.
 
         """
-        return r.load_stopwords(
-            path=self.path, encoder=self.encoders.stopwords
-        )
+        return load_stopwords(path=self.path, encoder=self.encoders.stopwords)
 
     def rmspecial_characters(
         self, txt: str, regex: str = "[A-ZÁÉÍÓÚÜÑa-záéíóúüñ]+"
@@ -95,7 +98,7 @@ class PreProcessor:
             Text to normalize.
         regex: str
             Regular expression for cleaning data.
-        
+
         Returns
         -------
         str
@@ -139,7 +142,7 @@ class PreProcessor:
         ----------
         tokens: List
             Text tokenized.
-        
+
         Returns
         -------
         List
