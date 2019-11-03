@@ -22,24 +22,29 @@ from utils.config import (
 
 class Mongo:
     """Mongo.
+
     Using PyMongo establish a connection to a MongoDB server and performs
     actions over the target database.
+
     Attributes
     ----------
     client: MongoClient
         A client-side representation of a MongoDB cluster.
     collection: Collection
         MongoDB target collection name.
+
     """
 
     __slots__ = ("client", "__collection", "__write_concern")
 
     def __init__(self, collection: str):
         """Constructor.
+
         Parameters
         ----------
         collection: Collection
             MongoDB target collection name.
+
         """
         self.client = self.__client
         self.__collection = self.__get_collection(collection)
@@ -50,10 +55,13 @@ class Mongo:
     @property
     def __client(self) -> MongoClient:
         """Client.
+
         Creates a client-side representation of a MongoDB cluster.
+
         Returns
         -------
         MongoClient
+
         """
         return MongoClient(
             host=MONGO_HOST,
@@ -65,14 +73,18 @@ class Mongo:
 
     def __get_collection(self, collection: str) -> Collection:
         """Get Collection.
+
         Get a MongoDB collection to perform CRUD actions.
+
         Parameters
         ----------
         collection: Collection
             MongoDB target collection name.
+
         Returns
         -------
         Collection
+
         """
         options: CodecOptions = CodecOptions(tz_aware=True)
         return self.client[MONGO_DB].get_collection(
@@ -81,23 +93,30 @@ class Mongo:
 
     def find(self) -> Generator:
         """Find.
+
         Builds a generator with all the documents in the given collection.
+
         Returns
         -------
         Generator
+
         """
         return self.__collection.find()
 
     def find_one(self, query: Dict) -> Optional[Dict]:
         """Find One.
+
         Search for a document in the give collection.
+
         Parameters
         ----------
         query: Dict
             Query to perform the search.
+
         Returns
         -------
         Dict, None
+
         """
         if "_id" in query:
             query["_id"] = ObjectId(query.pop("_id"))
@@ -105,21 +124,26 @@ class Mongo:
 
     def upsert(self, doc: Dict, attempts: int = 0) -> Dict:
         """Upsert.
+
         Insert or update a document in the given collection.
+
         Parameters
         ----------
         doc: Dict
             Document to insert in the collection.
         attempts: int
             Attempts trying to store the document.
+
         Raises
         ------
         ConnectionError
             If the document cannot be stored in the collection.
+
         Returns
         -------
         Dict
             Inserted document.
+
         """
         if attempts > 3:
             raise ConnectionError("Cannot connect to MongoDB.")
