@@ -92,6 +92,26 @@ class SQL(object):
         except Exception:
             self.__connect(attempts + 1)
 
+    def set_cursor(self, cursor_class: str = "DictCursor"):
+        """Set cursor.
+
+        Set the cursor class to use in the SQL connection.
+
+        Parameters
+        ----------
+        cursor_class: str
+            Cursor class to use.
+
+        """
+        if cursor_class == "Cursor":
+            self.cursor = self.conn.cursor(pymysql.cursors.Cursor)
+        if cursor_class == "DictCursor":
+            self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
+        if cursor_class == "SSCursor":
+            self.cursor = self.conn.cursor(pymysql.cursors.SSCursor)
+        if cursor_class == "SSDictCursor":
+            self.cursor = self.conn.cursor(pymysql.cursors.SSDictCursor)
+
     def find(
         self,
         table: str,
@@ -165,6 +185,7 @@ class SQL(object):
             raise ConnectionError("Cannot connect to MySQL.")
         if attempts > 0:
             time.sleep(0.001)
+        self.set_cursor()
         if "id" in registry:
             _id = registry.pop("id")
             query = f"UPDATE `{table}` SET "
@@ -181,6 +202,8 @@ class SQL(object):
                 query += f"'{value}',"
             query = f"{query[:-1]})"
         try:
+            # TODO(davestring/JoseRicardoL): Method should return the updated
+            # or inserted registry.
             self.cursor.execute(query)
             self.conn.commit()
         except Exception as e:
