@@ -15,14 +15,14 @@ import os
 import sys
 from typing import List
 
-from tasks.tasks import preprocess
+from tasks.tasks import preprocess_task, topic_modeling_task
 from utils.compere import compere
+from utils.logger import get_logger
 from utils.usage import usage
 
 
 PATH = os.path.dirname(os.path.abspath(__file__))
-
-
+LOGGER = get_logger(path=PATH)
 OPTS = {"p": False, "c": "conversations-ESCOM", "t": False}
 
 
@@ -33,9 +33,13 @@ def run():
 
     """
     if OPTS["p"]:
-        preprocess(opts=OPTS, path=PATH)
+        LOGGER.info("Performing preprocess task.\n")
+        preprocess_task(opts=OPTS, path=PATH)
     if OPTS["t"]:
-        pass
+        LOGGER.info("Performing topic modeling task.\n")
+        topic_modeling_task(
+            table="Message", column=["no_stopwords_with_lemmas_msg"]
+        )
 
 
 def prepare(argv: List):

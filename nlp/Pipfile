@@ -17,6 +17,7 @@ pre-commit = "*"
 nltk = "*"
 pymysql = "*"
 pymongo = "*"
+gensim = "*"
 
 [requires]
 python_version = "3.7"
