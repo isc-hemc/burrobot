@@ -18,6 +18,8 @@ nltk = "*"
 pymysql = "*"
 pymongo = "*"
 gensim = "*"
+matplotlib = "*"
+numpy = "*"
 
 [requires]
 python_version = "3.7"
