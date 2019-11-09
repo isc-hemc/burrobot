@@ -15,15 +15,40 @@ import os
 import sys
 from typing import List
 
-from tasks.tasks import preprocess_task, topic_modeling_task
+from tasks.tasks import (
+    load_topics_task,
+    plot_topics_task,
+    preprocess_task,
+    topic_modeling_task,
+)
 from utils.compere import compere
 from utils.logger import get_logger
 from utils.usage import usage
 
-
 PATH = os.path.dirname(os.path.abspath(__file__))
+
+
 LOGGER = get_logger(path=PATH)
-OPTS = {"p": False, "c": "conversations-ESCOM", "t": False}
+
+
+TOPIC_COLUMN_OPTS = [
+    "raw_msg",
+    "with_stopwords_no_lemmas_msg",
+    "with_stopwords_with_lemmas_msg",
+    "no_stopwords_no_lemmas_msg",
+    "no_stopwords_with_lemmas_msg",
+]
+
+
+OPTS = {
+    "p": False,
+    "c": "conversations-ESCOM",
+    "t": False,
+    "g": False,
+    "topics_column": "no_stopwords_with_lemmas_msg",
+    "num_topics": 100,
+    "load_topics": False,
+}
 
 
 def run():
@@ -37,9 +62,21 @@ def run():
         preprocess_task(opts=OPTS, path=PATH)
     if OPTS["t"]:
         LOGGER.info("Performing topic modeling task.\n")
-        topic_modeling_task(
-            table="Message", column=["no_stopwords_with_lemmas_msg"]
+        LOGGER.info(f"Topic column to analyse: {OPTS['topics_column']}.\n")
+        topics = topic_modeling_task(
+            num_topics=OPTS["num_topics"],
+            table="Message",
+            column=[OPTS["topics_column"]],
         )
+    if OPTS["load_topics"]:
+        LOGGER.info("Loading topics...\n")
+        topics = load_topics_task(path=PATH)
+    if OPTS["g"]:
+        LOGGER.info("Plotting topics...\n")
+        try:
+            plot_topics_task(topics=topics)
+        except UnboundLocalError as e:
+            LOGGER.error(f"{repr(e)}\n")
 
 
 def prepare(argv: List):
@@ -56,8 +93,17 @@ def prepare(argv: List):
     """
     compere()
     try:
-        args: List = ["preprocess=", "collection=", "topics=", "help"]
-        opts, args = getopt.getopt(argv, "p:c:t:h", args)
+        args: List = [
+            "preprocess=",
+            "collection=",
+            "topics=",
+            "topics_column=",
+            "graph=",
+            "num_topics=",
+            "load_topics=",
+            "help",
+        ]
+        opts, args = getopt.getopt(argv, "p:c:t:g:h", args)
     except getopt.GetoptError:
         usage(2)
 
@@ -65,14 +111,21 @@ def prepare(argv: List):
         if opt in ("-h", "--help"):
             usage()
         elif opt in ("-p", "--preprocess"):
-            p: bool = bool(int(arg))
-            OPTS["p"] = p
+            OPTS["p"] = bool(int(arg))
         elif opt in ("-c", "--collection"):
-            c: str = arg
-            OPTS["c"] = c
+            OPTS["c"] = arg
         elif opt in ("-t", "--topics"):
-            t: bool = bool(int(arg))
-            OPTS["t"] = t
+            OPTS["t"] = bool(int(arg))
+        elif opt in ("-g", "--graph"):
+            OPTS["g"] = bool(int(arg))
+        elif opt in ("--num_topics"):
+            OPTS["num_topics"] = int(arg)
+        elif opt in ("--load_topics"):
+            OPTS["load_topics"] = bool(int(arg))
+        elif opt in ("--topics_column"):
+            if arg not in TOPIC_COLUMN_OPTS:
+                usage()
+            OPTS["topics_column"] = arg
 
     run()
 

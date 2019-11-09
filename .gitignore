@@ -476,3 +476,9 @@ Temporary Items
 ################
 *scraper/data/*
 !scraper/data/.gitkeep
+
+
+#######
+# NLP #
+#######
+topics.txt

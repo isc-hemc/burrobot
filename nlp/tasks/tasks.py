@@ -3,15 +3,65 @@
 The functions defined in this module perform tasks given the prompt parameters.
 
 """
+import ast
+import os
 from typing import Dict, List
 
 from db.mongo import Mongo
 from db.mysql import SQL
 from nlp.text_processing import PreProcessor
 from nlp.topic_analysis import Topics
+from plotter.plotter import Plotteus
+from utils.lda_destructuring import destruct_latend_dirichlet_allocation
+from utils.logger import get_logger
 
 
-def topic_modeling_task(table: str, column: List):
+def load_topics_task(path: str) -> List:
+    """Load Topics.
+
+    Load a list of topics from a `txt` file.
+
+    Parameters
+    ----------
+    path: str
+        Location of the root of the project.
+
+    """
+    tpath = f"{path}/resources/topics.txt"
+    topics: List = []
+    try:
+        with open(tpath) as f:
+            for topic in f.readlines():
+                topic = topic.rstrip()
+                topics.append(ast.literal_eval(topic))
+        return topics
+    except FileNotFoundError as e:
+        get_logger(path).error(f"{repr(e)} - {tpath}\n")
+        return []
+
+
+def plot_topics_task(topics: List):
+    """Plot Topics.
+
+    Literaly plot the topics passed as argument.
+
+    Parameters
+    ----------
+    topics: List
+        List of topics to plot.
+
+    """
+    topics = destruct_latend_dirichlet_allocation(data=topics)
+    plotter: Plotteus = Plotteus()
+    plotter.style("dark_background")
+    for topic in topics:
+        setattr(plotter, "data", topic)
+        plotter.barplot(
+            xlabel="Probability", ylabel="Topic", title="Topic Analysis"
+        )
+
+
+def topic_modeling_task(num_topics: int, table: str, column: List):
     """Topic Modeling.
 
     Given a corpus, retrieves the more common topics.
@@ -29,9 +79,7 @@ def topic_modeling_task(table: str, column: List):
     corpus = [row[0] for row in sql.find(table=table, cols=column)]
     topics = Topics(corpus=corpus)
     related_topics = topics.latent_dirichlet_allocation()
-    topics = related_topics.print_topics(num_topics=100, num_words=5)
-    for topic in topics:
-        print(topic)
+    return related_topics.print_topics(num_topics=num_topics, num_words=5)
 
 
 def preprocess_task(opts: Dict, path: str):
