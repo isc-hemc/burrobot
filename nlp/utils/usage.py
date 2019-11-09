@@ -41,8 +41,28 @@ def usage(exit_code: int = 0):
                 ),
                 "\t-c, --collection=<int>",
                 ("\t\tMongoDB collection to retrieve the data."),
+                "\t-g, --graph=<int>",
+                (
+                    "\t\tPlot the most common topics retrieved from the LDA."
+                    "analysis."
+                ),
                 "\t-h, --help",
                 "\t\tHelp - Show this message.\n",
+                "\t--topic_column=<str>",
+                (
+                    "\t\tMySQL database column to analyse, the available "
+                    "options are: raw_msg, with_stopwords_no_lemmas_msg,\n\t\t"
+                    "with_stopwords_with_lemmas_msg, "
+                    "no_stopwords_no_lemmas_msg, no_stopwords_with_lemmas_msg."
+                ),
+                "\t--num_topics=<int>",
+                "\t\tNumber of topics to retrieve from the LDA analysis.",
+                "\t--load_topics=<int>",
+                (
+                    "\t\tLoad topics from a file named `topics.txt` in the "
+                    "resources directory. If exists this label should\n\t\tbe 1, "
+                    "otherwise 0."
+                ),
             ]
         )
     )

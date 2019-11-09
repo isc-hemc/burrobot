@@ -22,9 +22,9 @@ class Plotteus:
 
     """
 
-    __slots__ = ("_data",)
+    __slots__ = ("__data",)
 
-    def __init__(self, data: Dict):
+    def __init__(self, data: Dict = {}):
         """Constructor.
 
         Parameters
@@ -33,7 +33,7 @@ class Plotteus:
             Data to graph.
 
         """
-        self._data = data
+        self.__data = data
 
     @property
     def data(self) -> Dict:
@@ -47,7 +47,7 @@ class Plotteus:
             Class attribute `data`.
 
         """
-        return self._data
+        return self.__data
 
     @data.setter
     def data(self, data: Dict):
@@ -61,7 +61,7 @@ class Plotteus:
             Data to graph.
 
         """
-        self._data = data
+        self.__data = data
 
     @property
     def __values(self) -> List:
@@ -75,7 +75,7 @@ class Plotteus:
             Dictionary values.
 
         """
-        return list(self._data.values())
+        return list(map(lambda x: float(x), self.__data.values()))
 
     @property
     def __keys(self) -> List:
@@ -89,10 +89,10 @@ class Plotteus:
             Dictionary keys.
 
         """
-        return list(self._data.keys())
+        return list(self.__data.keys())
 
     @property
-    def themes(self) -> List:
+    def _themes(self) -> List:
         """Themes.
 
         Get the available themes of matplotlib.pyplot library.
@@ -117,11 +117,15 @@ class Plotteus:
             otherwise uses the default.
 
         """
-        if theme in self.themes:
+        if theme in self._themes:
             plt.style.use(theme)
 
     def barplot(
-        self, xlim: List, xlabel: str = "", ylabel: str = "", title: str = ""
+        self,
+        xlim: List = [],
+        xlabel: str = "",
+        ylabel: str = "",
+        title: str = "",
     ):
         """Barplot.
 
@@ -143,5 +147,9 @@ class Plotteus:
         keys: List = self.__keys
         _, ax = plt.subplots()
         ax.barh(keys, values)
+        labels = ax.get_xticklabels()
+        plt.setp(labels, rotation=45, horizontalalignment="right")
+        if not xlim:
+            xlim = [0, max(values)]
         ax.set(xlim=xlim, xlabel=xlabel, ylabel=ylabel, title=title)
         plt.show()

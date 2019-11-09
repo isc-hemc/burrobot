@@ -55,7 +55,7 @@ class Topics:
         return [word_tokenize(txt) for txt in self.corpus]
 
     def latent_dirichlet_allocation(
-        self, num_topics: int = 100, passes: int = 50
+        self, num_topics: int = 100, passes: int = 75
     ) -> LdaModel:
         """Latent Dirichlet Allocation.
 
