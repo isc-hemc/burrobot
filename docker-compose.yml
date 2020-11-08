@@ -54,7 +54,7 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 168.10.10.0/24
+        - subnet: 169.10.10.0/24
 
 volumes:
   burrobot-mongodb:
