@@ -66,7 +66,7 @@ def run():
         topics = topic_modeling_task(
             num_topics=OPTS["num_topics"],
             table="Message",
-            column=[OPTS["topics_column"]],
+            column=[OPTS["topics_column"], 'created_time'],
         )
     if OPTS["load_topics"]:
         LOGGER.info("Loading topics...\n")

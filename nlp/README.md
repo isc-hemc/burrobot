@@ -59,7 +59,7 @@ This script comes with a command line arguments that can be passed to improve th
 - -c, --collection: MongoDB collection to retrieve the data.
 - -g, --graph: Plot the most common topics retrieved from the LDA.analysis.
 - -h, --help: Help - Show this message.
-- --topic_column: MySQL database column to analyse, the available options are: raw_msg, with_stopwords_no_lemmas_msg, with_stopwords_with_lemmas_msg, no_stopwords_no_lemmas_msg, no_stopwords_with_lemmas_msg.
+- --topics_column: MySQL database column to analyse, the available options are: raw_msg, with_stopwords_no_lemmas_msg, with_stopwords_with_lemmas_msg, no_stopwords_no_lemmas_msg, no_stopwords_with_lemmas_msg.
 - --num_topics: Number of topics to retrieve from the LDA analysis.
 - --load_topics: Load topics from a file named `topics.txt` in the resources directory. If exists this label should be 1, otherwise 0.
 
@@ -83,16 +83,16 @@ or
 pipenv run python main.py -p 1
 ```
 
-This process may take a while. Once it's finish we can stract the topics of all the conversations given the `--topic_column` value, the default its *no_stopwords_with_lemmas_msg* (run --help for more information) and then plot those topics and visualize the result:
+This process may take a while. Once it's finish we can stract the topics of all the conversations given the `--topics_column` value, the default its *no_stopwords_with_lemmas_msg* (run --help for more information) and then plot those topics and visualize the result:
 
 ```bash
-pipenv run python main.py --topics=1 --graph=1 --num-topics=50 --topic_column=raw_msg
+pipenv run python main.py --topics=1 --graph=1 --num-topics=50 --topics_column=raw_msg
 ```
 
 or 
 
 ```bash
-pipenv run python main.py -t 1 -g 1 --num-topics=50 --topic_column=raw_msg
+pipenv run python main.py -t 1 -g 1 --num-topics=50 --topics_column=raw_msg
 ```
 
 ## Appendices

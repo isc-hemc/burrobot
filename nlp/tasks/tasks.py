@@ -76,7 +76,14 @@ def topic_modeling_task(num_topics: int, table: str, column: List):
     """
     sql: SQL = SQL()
     sql.set_cursor(cursor_class="Cursor")
-    corpus = [row[0] for row in sql.find(table=table, cols=column)]
+    corpus = [
+        row[0]
+        for row in sql.find(
+            table=table,
+            cols=column,
+            search_query={"created_time": [">", "2020-03-01T00:00:00+0000"]},
+        )
+    ]
     topics = Topics(corpus=corpus)
     related_topics = topics.latent_dirichlet_allocation()
     return related_topics.print_topics(num_topics=num_topics, num_words=5)

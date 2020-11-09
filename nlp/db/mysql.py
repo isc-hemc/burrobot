@@ -154,7 +154,7 @@ class SQL(object):
         if search_query:
             query += " WHERE "
             for key, value in search_query.items():
-                query += f"`{key}`='{value}' AND "
+                query += f"`{key}` {value[0]} '{value[1]}' AND "
             query = query[:-5]
         self.cursor.execute(query)
         if first:

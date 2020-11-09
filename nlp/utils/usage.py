@@ -48,7 +48,7 @@ def usage(exit_code: int = 0):
                 ),
                 "\t-h, --help",
                 "\t\tHelp - Show this message.\n",
-                "\t--topic_column=<str>",
+                "\t--topics_column=<str>",
                 (
                     "\t\tMySQL database column to analyse, the available "
                     "options are: raw_msg, with_stopwords_no_lemmas_msg,\n\t\t"
@@ -60,8 +60,8 @@ def usage(exit_code: int = 0):
                 "\t--load_topics=<int>",
                 (
                     "\t\tLoad topics from a file named `topics.txt` in the "
-                    "resources directory. If exists this label should\n\t\tbe 1, "
-                    "otherwise 0."
+                    "resources directory. If exists this label should\n\t\tbe "
+                    "1, otherwise 0."
                 ),
             ]
         )
