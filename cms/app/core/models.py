@@ -70,15 +70,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     Attributes
     ----------
-    email : str
+    email : EmailField
         User email address.
-    name : str
+    name : CharField
         User name.
-    lastname : str
+    lastname : CharField
         User lastname.
-    is_active : bool
+    is_active : BooleanField
         True if the user is active, otherwise False.
-    is_staff : bool
+    is_staff : BooleanField
         True if the user is allowed to have access to the admin site.
     objects : CustomUserManager
         Utility methods.
