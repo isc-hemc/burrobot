@@ -1,0 +1,23 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pycodestyle = "*"
+pylint = "*"
+mypy = "*"
+pyflakes = "*"
+bandit = "*"
+pydocstyle = "*"
+pre-commit = "*"
+black = "==19.3b0"
+flake8 = "*"
+faker = "==5.0.0"
+
+[packages]
+django = "~=2.2.0"
+djangorestframework = "~=3.10.0"
+
+[requires]
+python_version = "3.8"
