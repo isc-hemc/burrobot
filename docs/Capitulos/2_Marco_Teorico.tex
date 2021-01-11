@@ -1,0 +1,122 @@
+\chapter{Marco teórico}
+    \begin{description}
+        \item [Historia]:
+            En 1950, Alan Turing publica un artículo de Investigación llamado: Computing Machinery and Intelligence [1]; en la investigación, se cuestiona si las computadoras podrían pensar, aprender e interactuar con el usuario, además define la inteligencia de las maquinas como: “computadora humana capaz de procesar instrucciones y tener conciencia”. Gracias a la investigación de Turing, se inician las bases científicas para realizar las primeras investigaciones sobre inteligencia artificial y la comunicación entre humano computadora de una forma natural. Turing predijo que al final del siglo, el uso de las palabras y las opiniones educadas podrían alterarse tanto que se iba lograr hablar con las computadoras.
+                
+        \item [Objetivo del capitulo]:
+            Dado que este trabajo terminal emplea conceptos de diversas ́áreas de la Ingeniaría en Sistemas Computacionales, resulta fundamental dar una serie de definiciones técnicas que permitan un mejor entendimiento del documento.
+    \end{description}
+        
+    \section{Ciencias de la computación}
+        
+        \subsection{Inteligencia artificial}
+        Es una rama de las ciencias de la computación que se encarga de realizar tareas complejas emulando ciertas funciones cognitivas propias de los seres humanos
+        
+        \subsection{Procesamiento del lenguaje natural}
+                El Procesamiento de Lenguaje Natural, o también conocido como computación lingüística, le permite a la computadora interpretar el lenguaje humano basado en el razonamiento, aprendizaje y entendimiento. El PLN fue transformado por investigadores para poder construir un modelo exitoso en la traducción humano-computadora con lenguajes empíricos de datos. Para entender el lenguaje humano se han desarrollado tres técnicas:
+                
+                \begin{description}
+                    
+                    \item[Machine Translation:]Es la forma como la computadora traduce lenguajes humanos y logra descomponerlos en una estructura semántica entendida por una computadora. Según Hirschberg, esta tecnología ha avanzado gracias al \textit{Deep Learning}, que consiste en entrenar un modelo con diferentes representaciones para optimizar un objeto final, en este caso, las traducciones [3]. Además, permite el uso de tecnologías actuales como: Google Translate y Skype Translator.
+                    
+                    
+                    \item[Speech Recognition:] Es el proceso de convertir una señal del diálogo en una secuencia de palabras por medio de un algoritmo implementado por un programa de computadora [2]. La tecnología de speech recognition ha hecho posible a la computadora responder por comandos de voz y entender el lenguaje natural como lo hacen los asistentes virtuales de los teléfonos y los parlantes como Alexa. Existen tres formas del speech recognition: palabras insoladas, palabras conectadas, y diálogo espontáneo [2].
+                    
+                    \item[Speech Synthesis:] Es la forma en que la computadora pasa de texto a diálogo, y el software debe comprender la entonación, pronunciamiento y duración de este.
+                \end{description}
+            
+            En el mundo del procesamiento de lenguaje natural, existen técnicas y conceptos estudiados por computólogos y lingüistas expertos en esta área con la finalidad de poder lograr que las maquinas entiendan con mayor rapidez y facilidad el lenguaje humano, algunos de estos conceptos son:
+            
+           \begin{description}
+                \item[Acceso a la información:] Es la capacidad que permite dar acceso a información relevante a un usuario a medida que nuevos elementos estén disponibles.
+                \item[Adquisición de conocimiento:] Es la capacidad que permite adquirir conocimiento útil de un texto, generalmente se obtiene con la revisión a detalle del texto y haber obtenido patrones tras sintetizar múltiples documentos.
+                \item[Stemming:] La radicación o stemming es el proceso que consiste en descomponer una palabra en sus elementos constituyentes o afijos, es decir: prefijos, infijos y sufijos.
+                \item[Lema:] Es la forma canónica de una palabra, que por convenio se acepta como representante de todas las formas flexionadas de una misma palabra.
+                \item[Stopwords:] Es el nombre que reciben las palabras sin significado como artículos, pronombres, preposiciones, etc.
+                \item[Tokenización:] La tokenización es el proceso de dividir textos en unidades mínimas significativas.
+                \item[Latent Dirichlet Allocation:] La Asignación Latente de Dirichlet es un algoritmo de aprendizaje no supervisado que intenta describir un conjunto de observaciones como una mezcla de distintas categorías.
+                \item[Chatbot:] Un chatbot es una tecnología capaz de simular una conversación humana a través de una interfaz conversacional.
+            \end{description}
+            
+        \subsection{Aprendizaje Automático}
+        
+        Es una rama de las ciencias de la computación la cual se encarga de automatizar la construcción de modelos con base en el análisis de los datos a través del uso de algoritmos que iterativamente aprenden de los datos, su objetivo es proveer a la inteligencia artificial la capacidad de aprender automáticamente, algunas definiciones importantes dentro de esta área son:
+        
+        \begin{description}
+            \item[Neurona artificial:] Unidad básica de procesamiento cuyo funcionamiento se basa en el comportamiento de una neurona biológica
+            \item[Red neuronal:] Un algoritmo del aprendizaje automático que consiste en un conjunto de neuronas artificiales interconectadas, dichas conexiones albergan valores que representan la relevancia de partes especificas de la información de entrada.
+            \item[Aprendizaje supervisado:] Es una rama del aprendizaje automático donde el modelo aprende con base en ejemplos etiquetados e intentara encontrar una relación con los valores de salida. Tras haber entrenado de manera iterativa el modelo con una serie de conjuntos de valores de entrada y salida hasta alcanzar una métrica de error aceptable, el modelo sera capaz de predecir predecir y/o clasificar un valor desconocido con respecto al conjunto de entrenamiento.
+            \item[Aprendizaje no supervisado:] Es una rama del aprendizaje automático en la el modelo aprende con base de observaciones de las entradas, carece de una variable objetivo por lo que el modelo intentara agrupar los elementos.
+            \item[Aprendizaje profundo:] Es la implementación de redes neuronales en los algoritmos de aprendizaje automático, lo cual implica que el aprendizaje se haga de forma jerarquizada, a medida que la información pase por las distintas capas se obtendrá una mayor abstracción de la información entrante, la cantidad de capas que contengan estas redes neuronales pueden influir en la capacidad del algoritmo en entender el problema.
+        \end{description}
+        
+        
+        
+        \section{Entendimiento del lenguaje natural}
+            Es el responsable de transformar los enunciados de los mensajes obtenidos por parte del usuario a un formato comprensible para el agente conversacional, una de las principales tareas de este módulo es el detectar la intención del mensaje así como obtener nueva información adicional con forme a las restricciones del dominio cerrado 
+            
+        \section{Generador de lenguaje natural}
+            Es el responsable de generar texto partiendo de una entrada con una representación simbólica proveída por el usuario, cada respuesta proveída por este generador es tratada como un sistema de marcos, el se mapea a una oración y en base a esta se construye la siguiente salida del generador.
+            
+            Los componentes de estos generadores pueden se basados en modelos o en reglas. sin embargo, al esta basados en reglas las oraciones generadas son limitadas, adaptándose a las plantillas de respuestas que tienen.
+            
+            Hay otro tipo de generadores basados en el aprendizaje automático, los cuales usan varias fuentes de entrada el cual es capar de producir varios enunciados candidatos, los cuales de pueden tratar de diferentes maneras, comente se clasifican o se selecciona con base en reglas.
+            
+            
+        
+    
+
+\section{Servicios de la nube}
+
+    El computo en la nube consta de una serie de recursos configurables que son ofrecidos al publico en general, estos servicios se proveen vía internet de manera remota y tratan de asignar los recursos que el cliente requiere lo antes posible. \\
+    
+    Las características esenciales del computo en la nube son:
+    \begin{description}
+        \item[Autoservicio bajo demanda] El cliente debe poder obtener una extensión de recursos a pedido y sin la necesidad de interacción humana.
+        \item[Amplio acceso a la red]  El acceso a la redes debe constar de una gran disponibilidad para cualquier tipo de dispositivo que use el cliente.
+        \item[Conmutación de recursos] Un servicio en la nube determinado debería poder servir a múltiples usuarios simultáneamente, con recursos físicos y virtuales asignados y reasignados dinámicamente de acuerdo con la demanda del cliente. 
+        \item[Rápida elasticidad] Los recursos que solicite el cliente deben de ser elásticamente escalables tanto horizontal como verticalmente de acuerdo con la demanda, sea cual sea la cantidad de recursos requeridos, y en cualquier momento
+        \item[Servicio medido] Los clientes se atienden a pagar por cada servicio que usan, dependiendo del proveedor de la nube, se les asignaran tarifas de acuerdo a lo que ellos consideren correspondiente del uso de su servicio.
+    \end{description}
+
+    \subsection{AWS}
+        
+        Ofrecida oficialmente por amazon en el año 2006, Amazon Web Services (de ahora en adelante AWS) lanzo al publico en general sus servicios de computo en la nube.
+        Si bien es cierto, no fue la primer empresa en ofrecer este tipo de servicios, su modelo de negocios hacen posible el pago por uso de recursos como redes, informática, almacenamiento y servidores de aplicaciones datos a un costo escalable conforme a las necesidades de los usuarios.
+    
+        Hoy en día, Amazon Web Services es líder en el sector de informática en la nube y los principales beneficios que ofrece son:
+        \begin{description}
+                \item[Bajo costo:]AWS se maneja bajo una economía de escala en la cual nos ofrecen mayor potencia de recursos de informática a un menor costo operativo. 
+                \item[Disponibilidad:]AWS tiene presencia en mas de 180 países, con 69 zonas de disponibilidad en 22 regiones geográficas de todo el mundo. 
+                \item[Seguridad:] Los servicios y centros de datos disponen de múltiples capas de seguridad operativa y física para asegurar la integridad y seguridad de los datos.
+                \item[Rendimiento:] Los servicios ofrecidos constan de baja latencia y alto rendimiento con capacidades prácticamente ilimitadas la cual nos ayuda a recibir los cambios de las necesidades sin perder el rendimiento.
+        \end{description}
+       
+
+    \subsection{Micro servicios}
+    La arquitectura basada en micro servicios tiene como fin el separar el sistema en varios servicios de tal manera que cada uno de estos funja como una aplicación.
+    
+    Un servicio es una colección de componentes distribuidos que proveen de una funcionalidad a una aplicación o sistema, estos pequeños servicios son capaces de correr en distintos procesos y se comunican entre si haciendo comúnmente uso de las APIs. Existen dos tipos de comunicación entre los servicios: síncrona y asíncrona. En el caso de la comunicación síncrona, un servicio \textbf{x} manda una solicitud a otro servicio \textbf{y}, así, \textbf{x} se queda a la espera de la respuesta de \textbf{y}. En el caso de las llamadas asíncronas, el servicio \textbf{x} manda la solicitud a \textbf{y}, pero en lugar de quedarse a la espera de una respuesta, este continua su ejecución. Dependiendo de la frecuencia de comunicación entre servicios se determinara el grado de independencia y autonomía que tiene el servicio.
+    
+    El objetivo de llevar un sistema a este grado de modulación es poder escalar hacia arriba o abajo el proyecto de acuerdo a las necesidades del mismo para así poderlo orquestarlo de forma exitosa. Esto permite gestionar de manera rápida y eficiente cada uno de los servicios, de tal manera que las tareas más comunes como el montaje, inicialización, chequeo de salud, comunicación, exposición de puertos, escalamiento, etc., ya no necesiten de intervención humana y sea posible la automatización del despliegue del sistema o aplicación, para ello simplemente definimos la arquitectura de servicios que ocupa nuestro sistema en una lista de procesos.
+    
+    \subsection{Contenedor}
+        Es un paquete en el cual se incluyen todas las configuraciones, dependencias y software, de tal manera que se pueda usar como un ejecutable, las principales características son su seguridad, su flexibilidad al correr sobre cualquier sistema operativo que soporte un gestor de contenedores y la ligereza al momento de ester en ejecución. la diferencia con las maquinas vertuales es que los contenedores virtualizan un sistema operativo ligero y no todo el hardware.
+        
+
+    \subsection{Tipos de servicios}
+        \begin{description}
+            \item[Software como servicio:]
+            Son programas o aplicaciones ofrecidos como servicios, los cuales corren sobre la infraestructura de un proveedor de servicios de la nube, esto implica no tener que administrar ni controlar los recursos ocupados por el programa como la red, el sistema operativo, almacenamiento, entre otros. Solo se permite configurar ciertos aspectos del servicio a ocupar de acuerdo a las necesidades del programa. Es necesario proveer al cliente de alguna interfaz con la cual pueda interactuar desde diferentes dispositivos para consumir el servicio de manera remota
+            
+
+            \item[Plataforma como servicio:] Es una serie de servicios desplegadas dentro de un entorno los cuales corren sobre la infraestructura de un proveedor de servicios de la nube, esto implica no tener que administrar ni controlar los recursos ocupados por el programa como la red, el sistema operativo, almacenamiento, entre otros, únicamente sobre las aplicaciones desplegadas y algunas de las configuraciones de entorno del alojamiento de esas aplicaciones.
+            
+            \item[Infraestructura como servicio:] Son una forma de ofrecerle al cliente recursos informáticos, almacenamiento y redes dentro de las características de nuestros servicios, al igual que los otros dos tipos de servicios , no podemos administrar los recursos sin embargo se tiene una mayor capacidad de configuración y cierto control sobre estos.
+        \end{description}
+
+
+    
+    
+    
+    
