@@ -1,0 +1,59 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "API: Run",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [
+                "runserver",
+                "--nothreading"
+            ],
+            "django": true
+        },
+        {
+            "name": "API: Migrate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [
+                "migrate"
+            ],
+            "django": true
+        },
+        {
+            "name": "API: Make Migrations",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [
+                "makemigrations"
+            ],
+            "django": true
+        },{
+            "name": "API: Show Migrations",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [
+                "showmigrations"
+            ],
+            "django": true
+        },{
+            "name": "API: Run Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [
+                "test"
+            ],
+            "django": true
+        },
+    ]
+}

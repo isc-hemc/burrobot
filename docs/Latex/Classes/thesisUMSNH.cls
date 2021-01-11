@@ -410,9 +410,9 @@
 	  \begin{center}
 	    \ifportada
 	        \includegraphics[height=3cm]{Latex/Classes/Escudos/ipn}\\[10pt]
-    	    \hskip2pt\colorvrule{Guinda}{2.5pt}{13cm}
+    	    \hskip2pt\colorvrule{Guinda}{2.5pt}{17cm}
         	\hskip -0.4mm
-	        \colorvrule{Guinda}{1pt}{13cm}\\[10pt]
+	        \colorvrule{Guinda}{1pt}{17cm}\\[10pt]
 	        \includegraphics[scale=.06]{Latex/Classes/Escudos/escom}
 	    \else
 	        \includegraphics[height=3cm]{Latex/Classes/Escudos/ipn}\\[10pt]
@@ -448,7 +448,7 @@
 
 
     	% Tipo de trabajo
-	    \makebox[6cm][s]{\huge Trabajo Terminal}\\[6pt]
+	    \makebox[6cm][s]{\huge Trabajo Terminal I}\\[6pt]
 	    2019-A087\\[5pt]
     	\textbf{{\@degree}}\\[30pt]
 
@@ -470,9 +470,10 @@
 
     	{\small DIRECTORES:\\ {\@director}}
 
-	    \vspace{0.5cm}
+	    \vspace{3.5cm}
 
-    	%{\small TUTOR:\\ {\@tutor}}
+    	{\small Palabras clave:\\ {\@keywords}}
+
 
 	    \vspace{3.5cm}
 

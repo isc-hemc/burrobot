@@ -7,6 +7,7 @@
 - [Dependencies](#dependencies)
 - [Content](#content)
 - [Appendices](#appendices)
+- [Authors](#Authors)
 
 ## Dependencies
 
@@ -47,6 +48,16 @@ pipenv run python manage.py makemigrations
 ```bash
 pipenv run python manage.py migrate
 ```
+
+### Runing the Server
+
+To run the serve we only need to execute the following command:
+
+```bash
+pipenv run python manage.py runserver
+```
+
+The server will be launched on the port `8000`.
 ## Appendices
 ### Pre Commit
 
@@ -57,51 +68,6 @@ pipenv run pre-commit install
 ```
 
 Now, `pre-commit` will run automatically on `git commit`.
-### Git Flow
-
-This project uses [git-flow](http://danielkummer.github.io/git-flow-cheatsheet/) guideline to perform high-level repository operations. Once you clone this repository make shure to execute the following command to start using `git-flow` and continue using the project guideline.
-
-```bash
-git flow init
-```
-
-For this project from the `main` branch we will take the production build and from the `develop` branch the staging environment.
-
-#### Feature
-
-For developing a new _feature_ we need to run the following command:
-
-```bash
-git flow feature start my-feature
-```
-
-Once all the changes are done we should squash all out commits and merge with the `develop`branch:
-
-```bash
-git flow feature finish my-feature
-```
-
-#### Release
-
-For release a new version of the application we should run the following command:
-
-```bash
-git flow release start vX.X.X
-```
-
-The `vX.X.X` will be the version tag of the release, we use [semver](https://semver.org/lang/es/) guideline when creating a new release version. Once the release it ready to be deployed we can run the following command:
-
-```bash
-git flow release finish vX.X.X
-```
-
-This will merge the release branch into `develop` and `main`, but not only that, it will also create a `tag` that we will push to our repository using the command:
-
-```bash
-git push --tags
-```
-
-This will help us to keep out project stable and healthy.
 
 ### Django Utils
 
@@ -131,3 +97,9 @@ pipenv run python manage.py createsuperuser
 ```
 
 After that, enter the email and password of the superuser in the command line.
+
+## Authors
+
+***David Martinez** - [Davestring](https://github.com/Davestring)
+
+***José Ricardo López García** - [JoseRicardoL](https://github.com/JoseRicardoL)

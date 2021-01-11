@@ -1,0 +1,870 @@
+\chapter{Análisis del prototipo}
+    \section{Reglas de negocio}
+        \begin{longtable}[c]{| >{\centering\arraybackslash}m{1.5cm} | >{\centering\arraybackslash}m{9cm} |}
+            \hline
+            {\bf Número} & {\bf Descripción} \\ \hline
+            \endfirsthead
+            
+            \hline
+            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+            {\bf Número}  & {\bf Descripción} \\ \hline
+            \endhead
+
+            1 & Prototipo de agente conversacional que será utilizado con fines informativos.\\ \hline 
+            2 & Gestión escolar proveerá una lista de preguntas y respuestas sobre los trámites del ámbito educativo.\\ \hline 
+            3 & Se obtendrá los mensajes de por lo menos un grupo o página de Facebook oficial de la escuela.\\ \hline 
+            4 & El administrador del grupo o página en cuestión proveerá de las credenciales necesarias para obtener sus conversaciones.\\ \hline
+            5 & El prototipo de agente conversacional responderá preguntas de la comunidad realizadas por medio del servicio de Messenger de la pagina de Facebook asociada.\\ \hline 
+            6 & Solo se responderá a los mensajes cuyo contenido sea únicamente texto.\\ \hline
+            7 & El uso inadecuado de la tecnología propuesta será causa de una suspensión temporal del servicio al usuario.\\ \hline
+
+            \caption{Reglas de negocio.\label{long}}
+        \end{longtable}
+\newpage
+    \section{Requerimientos funcionales}
+
+        \begin{longtable}[c]{| >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{6cm} |}
+            \hline
+            {\bf Número} & {\bf Requerimiento} & {\bf Descripción} \\ \hline
+            \endfirsthead
+            
+            \hline
+            \multicolumn{3}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+            {\bf Número} & {\bf Nombre} & {\bf Descripción} \\ \hline
+            \endhead
+
+            1 & Servicio a proveer & El prototipo de agente conversacional se encargará de responder preguntas frecuentes sobre temas de gestión escolar. \\ \hline 
+            2 & Almacenamiento de mensajes no estructurados & La información no estructurada obtenida por las reglas de negocio 2 y 3 se almacenan en una base de datos no relacional. \\ \hline 
+            3 & Preprocesado & Los datos almacenados de acuerdo al requerimiento funcional dos serán preprocesados para poder hacer un análisis de texto. \\ \hline 
+            4 & Almacenamiento de mensajes estructurados & Los datos preprocesados de acuerdo al requerimiento funcional 3 serán almacenados en una base de datos relacional.  \\ \hline
+            5 & \textit{Topic analysis} & De los datos estructurados obtenidos por el requerimiento funcional 4, se realizara un análisis con el algoritmo \textbf{LDA} para encontrar los temas más frecuentes.  \\ \hline
+            6 & Entrenamiento & La información alojada en la base de datos relacional de acuerdo al requerimiento funcional 4 servirán para entrenar el modelo de inteligencia artificial. \\ \hline 
+            7 & Validación de seguridad & Se verificarán los mensajes provenientes de la API de Facebook para saber si no es algún tipo de ataque DDos a nuestro prototipo. \\ \hline 
+            8 & Recepción de mensajes & La API de Facebook provee de un \textit{end-point} de mensajes escritos por los usuarios para su obtención, procesamiento y validación. \\ \hline
+            9 & Envió de mensajes & Se devolverá la respuesta a la API de Facebook la cual se encargará de entregar esta al \textit{chat} correspondiente del usuario en cuestión.\\ \hline
+            \caption{Requerimientos funcionales.\label{long}}
+        \end{longtable}
+    \section{Requerimientos no funcionales}
+
+        \begin{longtable}[c]{| >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{6cm} |}
+            \hline
+            {\bf Número} & {\bf Requerimiento} & {\bf Descripción} \\ \hline
+            \endfirsthead
+            
+            \hline
+            \multicolumn{3}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+            {\bf Número} & {\bf Nombre} & {\bf Descripción} \\ \hline
+            \endhead
+
+            1 & Rendimiento & Se ofrece un servicio con tiempos de respuesta cortos con capacidad de responder en paralelo múltiples peticiones sin afectar su rendimiento.\\ \hline 
+            2 & Alta disponibilidad & El prototipo de agente conversacional asegura una continuidad operacional por largos periodos de tiempo de tal forma que el servicio siempre este disponible.  \\ \hline 
+            3 & Auto administrado & No requiere de intervención humana en la parte operativa para su correcto funcionamiento.\\ \hline 
+            4 & Robustes & Cuenta con esta característica debido a su modulación de código de acuerdo a su tipo de arquitectura, buenas practicas implementadas y su tolerancia a fallos. \\ \hline 
+            5 & Bajo costo operacional & Las tecnologías utilizadas serán adecuadas para el despliegue del proyecto pensando en la optimización de recursos, solo se pagará por lo que se usa. \\ \hline 
+            6 & Escalabilidad & El prototipo será capaz de atender a todos los mensajes ajustando automáticamente la cantidad de recursos que necesita para llegar a cabo todas las tareas. \\ \hline
+            7 & Fiabilidad & Los mensajes que lleguen al \textit{chat} de la página de Facebook asociada al proyecto serán respondidas en forma ordenada. \\ \hline 
+            8 & Seguridad & Las tecnologías ocupadas para este prototipo cuentan con las normas ISO/IEC 27001:2013, 27017:2015, 27018:2014 y 9001:2015. La comunicación entre el prototipo y Facebook Graph API se dará mediante el protocolo SSL.  \\ \hline
+            9 & Concurrencia de usuarios & Será capaz de responder en paralelo a una gran cantidad preguntas enviadas a nuestro prototipo por medio de Facebook Graph API. \\ \hline 
+            10 & Implementación & El proyecto sera desplegado haciendo uso de la infraestructura y servicios proveídos por AWS. \\ \hline 
+            11 & Arquitectura del software & El proyecto estará compuesto por una serie de micro servicios que se comunicaran entre ellos. \\ \hline 
+            12 & Lenguaje de programación & Se ocupará el lenguaje de programación Python\\ \hline 
+            13 & Versionamiento de código & El código utilizado para el desarrollo de este proyecto sera gestionado por un controlador de versiones\\ \hline 
+            \caption{Requerimientos no funcionales.\label{long}}
+        \end{longtable}
+\newpage
+    \section{Análisis de factibilidad económica}
+        Objetivos:
+        \begin{itemize}
+            \item Estimar el esfuerzo requerido para realizar el proyecto
+            \item Estimar la duración del desarrollo del proyecto
+            \item Estimar el costo del proyecto
+        \end{itemize}
+
+        \subsection{Análisis de punto de función}
+            \begin{description}
+                \item [Asignación de puntos]:
+                    
+                    \begin{enumerate}
+                        \item Entrada externa - Pantallas donde se ingresan los datos
+                        \item Salida externa - Pantalla donde se reciben los datos
+                        \item Consulta externa - Recuperación de datos del cliente
+                    \end{enumerate}
+                \item [Almacenamiento Función de datos]:
+                    \begin{enumerate}
+                        \item Archivo lógico interno - Datos guardados del cliente
+                        \item Archivo de interfaz externo - Datos compartidos entre sistemas externos
+                    \end{enumerate}
+                \item [Identificación de funciones y asignación de tipo]:
+                    \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                        \hline
+                        {\bf Nombre} & {\bf Tipo de punto de función}\\ \hline
+                        \endfirsthead
+                        
+                        \hline
+                        \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                        {\bf Nombre} & {\bf Tipo de Tipo de punto de función}\\ \hline
+                        \endhead
+                        
+                        Extracción de mensajes &  Archivo de interfaz externo\\ \hline
+                        Almacenamiento de datos crudos & Archivo lógico interno \\ \hline
+                        Análisis y preprocesamiento de datos crudos & Archivo lógico interno \\ \hline
+                        Gestión de datos estructurados preprocesados & Archivo lógico interno \\ \hline
+                        Envió de mensaje de Facebook API & Archivo de interfaz externo \\ \hline
+                        Envió de respuesta a Facebook API & Archivo de interfaz externo\\ \hline
+                        Validación del mensaje & Archivo lógico interno \\ \hline
+                        Análisis del mensaje & Archivo lógico interno \\ \hline
+                        Búsqueda entre documentos & Archivo lógico interno \\ \hline
+                        \caption{Identificación de funciones y asignación de tipo.\label{long}}
+                    \end{longtable}
+                \newpage
+                \item [Catalogo de valores de los tipos de puntos de función sin ajustar según su complejidad]:
+                    \begin{longtable}[c]{| >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} |}
+                    
+                        \hline
+                        {\bf Tipo} & {\bf Baja} & {\bf Media} & {\bf Alta} \\ \hline
+                        \endfirsthead
+                        
+                        \hline
+                        \multicolumn{4}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                        {\bf Tipo} & {\bf Baja} & {\bf Media} & {\bf Alta} \\ \hline
+                        \endhead
+            
+                        Entrada externa	& 3	& 4	& 6\\ \hline
+                        Salida externa & 4 & 5 & 7 \\ \hline
+                        Consulta externa & 3 & 4 & 6 \\ \hline
+                        Archivo lógico interno & 7 & 10 & 15 \\ \hline
+                        Archivo de interfaz externo	& 5	& 7	& 10 \\ \hline
+                        \caption{Valores estándar de la \textit{International Function Point Users Group}.\label{long}}
+                    \end{longtable}
+                \item [Obtención de los puntos de función sin ajustar]:
+                     \begin{longtable}[c]{| >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} |}
+                    
+                        \hline
+                        {\bf Tipo} & {\bf Baja} & {\bf Media} & {\bf Alta} & {\bf Total} \\ \hline
+                        \endfirsthead
+                        
+                        \hline
+                        \multicolumn{5}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                        {\bf Tipo} & {\bf Dificultad} & {\bf Valor} & {\bf Cantidad} & {\bf Total} \\ \hline
+                        \endhead
+            
+                        Archivo lógico interno & Alta & 15 & 6 & 90 \\ \hline
+                        Archivo de interfaz externo	& Alta & 10 & 3 & 30\\ \hline
+                        \multicolumn{4}{| c |}{Total de puntos de función sin ajustar} & 120 \\ \hline
+                        \caption{Puntos de función sin ajustar.\label{long}}
+                        \label{fig:PuntosFuncionSinAjustar}
+                    \end{longtable}
+                \item [Obtención del factor de ajuste]:
+                    \begin{longtable}[c]{| >{\centering\arraybackslash}m{8cm} | >{\centering\arraybackslash}m{2cm} |}
+                    
+                        \hline
+                        {\bf Factor de ajuste} & {\bf Puntaje}\\ \hline
+                        \endfirsthead
+                        
+                        \hline
+                        \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                        {\bf Factor de ajuste} & {\bf Puntaje}\\ \hline
+                        \endhead
+                        
+                        Comunicación de Datos & 5 \\ \hline
+                        Función Distribuida & 5 \\ \hline
+                        Rendimiento & 4 \\ \hline
+                        Configuración utilizada masivamente & 4 \\ \hline
+                        Tasas de Transacción & 4 \\ \hline
+                        Entrada On-Line de datos & 5 \\ \hline
+                        Diseño para la eficiencia de usuario final & 5 \\ \hline
+                        Actualización On-Line & 2 \\ \hline
+                        Complejidad del procesamiento  & 5 \\ \hline
+                        Utilizable en otras aplicaciones & 5 \\ \hline
+                        Facilidad de Instalación & 5 \\ \hline
+                        Facilidad de Operación & 5 \\ \hline
+                        Puestos Múltiples & 3 \\ \hline
+                        Facilidad de Cambio & 5 \\ \hline
+                        Requerimientos de otras Aplicaciones & 3 \\ \hline
+                        Seguridad, Privacidad y Auditoría & 2 \\ \hline
+                        Uso directo de otras empresas & 4 \\ \hline
+                        Documentación & 5 \\ \hline \hline
+                        Total & 76 \\ \hline
+                        
+                        \caption{Tabla de factores de ajuste .\label{long}}
+                        \label{fig:FactoresaAjuste}
+                    \end{longtable}
+            
+                \item [Ajuste de punto de función]:
+                    \begin{equation}
+                        PFA=PFSA*[0.65+(0.01*FA)] \label{eq:EqAjusteFuncion}
+                    \end{equation}
+                    Sea:
+                    \begin{itemize}
+                        \item PFSA : Puntos de función sin ajustar
+                        \item PFA : Puntos de función ajustado
+                        \item FA : Factor de ajuste
+                    \end{itemize}
+                    Donde:
+                    \begin{itemize}
+                        \item PFSA = 120
+                        \item FA = 76 
+                    \end{itemize}
+                    Basados en los resultados de las tablas: ~\ref{fig:PuntosFuncionSinAjustar} y ~\ref{fig:FactoresaAjuste} respectivamente, entonces:
+                    \begin{equation}
+                        PFA=120*[0.65+(0.01*76)]
+                    \end{equation}
+                    Por lo tanto:
+                    \begin{center}
+                        PFA = 169.2
+                    \end{center} 
+                \item [Estimación de esfuerzo en Horas Hombre (HH)]:
+                    \begin{equation}
+                        HH = PFA / CI * HDI
+                        \label{eq:EqEstimacionEsfuerzoHH}
+                    \end{equation}
+                    Sea:
+                    \begin{itemize}
+                        \item HH : Horas Hombre
+                        \item PFA : Puntos de función ajustado
+                        \item CI: Cantidad de integrantes
+                        \item HDI: Promedio de horas diarias invertidas
+                    \end{itemize}
+                    Donde:
+                    \begin{itemize}
+                        \item Punto función ajustado = 169.2
+                        \item Cantidad de integrantes = 2
+                        \item Promedio de horas = 8
+                    \end{itemize}
+                    Entonces:
+                    \begin{equation}
+                        HH = 169.2 / 2 * 8
+                    \end{equation}
+                    Por lo tanto:
+                    \begin{center}
+                        HH = 676.8
+                    \end{center}
+                \item [Duración del desarrollo del proyecto]:
+                    \begin{equation}
+                        DP = HH / HDI * DMI
+                        \label{eq:EqEstimacionEsfuerzoHH}
+                    \end{equation}
+                    Sea:
+                    \begin{itemize}
+                        \item HH : Horas hombre
+                        \item HDI : Promedio de horas diarias invertidas
+                        \item DMI: Promedio de días invertidos al mes
+                        \item DP: Duración del proyecto en meses
+                    \end{itemize}
+                    Donde:
+                    \begin{itemize}
+                        \item DMI = 22
+                        \item HDI = 4
+                    \end{itemize}
+                    Entonces:
+                    \begin{equation}
+                        DP = 676.8 / 4 / 22
+                    \end{equation}
+                    Por lo tanto:
+                    \begin{center}
+                        DP = 7.69 meses \approx 7 meses 21 días\
+                    \end{center} 
+                    
+                \item [Distribución genérica del esfuerzo]:\\
+                \begin{longtable}[c]
+                    {| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{4cm} |}
+                        \hline
+                        {\bf Actividad} & {\bf Porcentaje} & {\bf Tiempo}\\ \hline
+                        \endfirsthead
+                        
+                        \hline
+                        \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                        {\bf Actividad} & {\bf Porcentaje} & {\bf Tiempo}\\ \hline
+                        \endhead
+                        
+                        Entendimiento del negocio & 20 & 1 mes 17 días\\ \hline
+                        Adquisición y entendimiento de los datos & 30 & 2 meses 9 días\\ \hline
+                        Modelado & 25 & 1 mes 28 días\\ \hline
+                        Despliegue del servicio & 15 & 1 mes 4 días\\ \hline
+                        Pruebas & 10 & 23 días\\ \hline
+                        
+                        \caption{Distribución del esfuerzo\label{long}}
+                    \end{longtable}
+                \item [Costo del proyecto]:
+                    \begin{description}
+                        \item[Costo de desarrollo]:
+                            
+                            \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} |}
+                            
+                                \hline
+                                {\bf Recurso}& {\bf Horas} & {\bf Sueldo por hora} & {\bf Cantidad}&{\bf Total}  \\ \hline
+                                \endfirsthead
+                                
+                                \hline
+                                \multicolumn{4}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                                {\bf Recurso}& {\bf Horas} & {\bf Sueldo por hora} & {\bf Total}  \\ \hline
+                                \endhead
+                    
+                                Data scientist & 696 & \$190 & 2 & \$264,480 \\ \hline
+                                Devops Engineer & 136 & \$213 & 2 & \$57,936\\ \hline
+                                Tester & 92 & \$144 & 2 & \$26,496\\ \hline
+                                \multicolumn{4}{| c |}{Total \ref{long}}&\$348,912\\ \hline
+    
+                                \caption{Costo humano\label{long}}
+                            \end{longtable}
+                        \item[Costos materiales]:
+
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{3cm} |}
+                            
+                                \hline
+                                {\bf Recurso}& {\bf Costo}  \\ \hline
+                                \endfirsthead
+                                
+                                \hline
+                                \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                                {\bf Recurso}& {\bf Costo}  \\ \hline
+                                \endhead
+                                \multicolumn{2}{| c |}{Hardware}\\ \hline
+                                1 computadora Macbook pro & \$ 20,000\\ \hline
+                                1 computadora Dell serie 5000 & \$ 19,300\\ \hline
+                                \multicolumn{2}{| c |}{Software}\\ \hline
+                                MacOS & \$0.0\\ \hline
+                                Linux ubuntu & \$0.0\\ \hline
+                                Python & \$0.0\\ \hline
+                                Docker & \$0.0\\ \hline
+                                AWS capa gratuita & \$0.0\\ \hline
+                                *AWS & \$20000\\ \hline
+                                MongoDB & \$0.0\\ \hline
+                                MySQL GPL & \$0.0\\ \hline \hline
+                                Total &\$59,300\\ \hline
+                                \caption{Costos materiales\label{long}}
+                                \label{tab:Costos}
+
+                            \end{longtable}
+                        \newpage
+                        \item[Computo en la nube]:
+                        En la tabla ~\ref{tab:Costos} hablamos sobre los costos materiales previstos para el proyecto, a continuación especificaremos cada servicio que ocuparemos, en la siguiente tabla se muestran los limites mensuales que ofrece AWS en su capa gratuita.
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{3cm} |}
+                
+                            \hline
+                            {\bf Servicio} & {\bf Recurso} & {\bf Cantidad}\\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{3}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Servicio} & {\bf Recurso} & {\bf Cantidad al mes}\\ \hline
+                            \endhead
+                            
+                            \multicolumn{3}{| c |}{Almacenamiento}\\ \hline
+                            \multirow{4}{*}{S3} & Almacenamiento estándar & 5GB \\ \cline{2-3}
+                            & Solicitudes GET & 20 000 \\ \cline{2-3}
+                            & Solicitudes PUT, COPY, POST o LIST & 2 000 \\ \cline{2-3}
+                            & Transferencia de datos de salida & 15 GB \\ \hline
+                            
+                            \multicolumn{3}{| c |}{Machine learning}\\ \hline
+                            \multirow{3}{*}{Sage Maker} & Cuaderno de notas con instancias t2.medium o t3.medium  & 250 Hrs \\ \cline{2-3}
+                            & Entrenamiento con maquinas m4.xlarge o m5.xlarge & 50 Hrs \\ \cline{2-3}
+                            & Implementacion del modelo con maquinas m4.xlarge o m5.xlarge& 125 Hrs \\ \hline
+                            
+                            \multicolumn{3}{| c |}{Computación}\\ \hline
+                            \multirow{2}{*}{Lambda} & Solicitudes  & 1 000 000 \\ \cline{2-3}
+                            & Tiempo de informatica & 2 200 Hrs \\ \hline
+                            
+                            \multicolumn{3}{| c |}{Soluciones móviles}\\ \hline
+                            \multirow{3}{*}{API Gateway} & Llamadas al API  & 1 000 000 \\ \cline{2-3}
+                            & Mensajes & 1 000 000 \\ \cline{2-3}
+                            & Minutos de conexión &  3 125 Hrs \\ \hline
+                            
+                            \multicolumn{3}{| c |}{Integración de aplicaciones}\\ \hline
+                            SQS & Solicitudes & 1 000 000 \\ \hline
+                            
+                            \caption{Servicios de la capa gratuita que ocuparemos .\label{long}}
+                            \label{fig:FactoresaAjuste}
+                        \end{longtable}
+                        
+                        \item [Costos de los servicios al sobrepasar la capa gratuita]:
+                        En la tabla ~\ref{tab:Costos} se contemplan \$20,000
+                        por si la capa gratuita es insuficiente de acuerdo a las necesidades del proyecto.
+                        Se empezara a cobrar por el tipo de servicio que haya alcanzado el limite al sobre pasar los que nos ofrece la capa gratuita de AWS, se cobra bajo demanda y únicamente por lo que se usa.
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Número de solicitudes (por mes)} & {\bf Precio (por millón)}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Número de solicitudes (por mes)} & {\bf Precio (por millón)}  \\ \hline
+                            \endhead
+                        
+                            Primeros 333 millones
+                            &
+                            3,50 USD\\ \hline
+                            
+                            Próximos 667 millones
+                            &
+                            2,80 USD\\ \hline
+                            
+                            Próximos 19 mil millones
+                            &
+                            2,38 USD\\ \hline
+                            
+                            Más de 20 mil millones
+                            &
+                            1,51 USD\\ \hline
+                            \caption{AWS API gateway - precios.\label{long}}
+                        \end{longtable}
+                        
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{3cm} | >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                    
+                            \hline
+                            {\bf Memoria (MB)} & {\bf Segundos de la capa gratuita al mes} & {\bf Precio por 100 ms (USD)}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{3}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Memoria (MB)} & {\bf Segundos de la capa gratuita al mes} & {\bf Precio por 100 ms (USD)}  \\ \hline
+                            \endhead
+                
+                            128	& 3 200 000	& 0,000000208 \\ \hline
+                            192	& 2 133 333	& 0,000000313 \\ \hline
+                            ...&...&... \\ \hline
+                            2 944 &	139 130	& 0,000004793 \\ \hline
+                            3 008 &	136 170 & 0,000004897 \\ \hline
+                
+                            \caption{AWS Lambda - precios.\label{long}}
+                        \end{longtable}
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Tipo de encolador} & {\bf Precios por cada millón de solicitudes después de la capa gratuita (mensual)}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Tipo de encolador} & {\bf Precios por cada millón de solicitudes después de la capa gratuita (mensual)}  \\ \hline
+                            \endhead
+                
+                            Cola estándar & 0,40 USD \\ \hline
+                            Cola FIFO & 0,50 USD \\ \hline
+                            \caption{AWS SQS tipo de encolador- precios.\label{long}}
+                        \end{longtable}
+                        
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                    
+                            \hline
+                            {\bf Almacenamiento estándar} & {\bf Precio}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Almacenamiento estándar} & {\bf Precio}  \\ \hline
+                            \endhead
+                
+                            Primeros 50 TB/mes &	0,023 USD por GB\\ \hline    
+                            Siguientes 450 TB/mes &	0,022 USD por GB\\ \hline    
+                            Más de 500 TB/mes &	0,021 USD por GB\\ \hline     
+                            \caption{AWS S3 almacenamiento - precios.\label{long}}
+                
+                        \end{longtable}
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Solicitudes al almacenamiento estándar} & {\bf Precio}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Solicitudes al almacenamiento estándar} & {\bf Precio}  \\ \hline
+                            \endhead
+                
+                            Datos devueltos por S3 Select &	0,0007 USD por GB\\ \hline       
+                            Datos escaneados por S3 Select &	0,002 USD por GB\\ \hline       
+                            Solicitudes PUT, COPY, POST o LIST &	0,005 USD por cada 1000 solicitudes\\ \hline       
+                            GET, SELECT y el resto de las solicitudes &	0,0004 USD por cada 1000 solicitudes\\ \hline      
+                            \caption{AWS S3 solicitudes - precios.\label{long}}
+                        \end{longtable}
+                        \newpage
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Transferencia ENTRANTE de datos} & {\bf Precio}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Transferencia ENTRANTE de datos} & {\bf Precio}  \\ \hline
+                            \endhead
+                
+                            Todas las transferencias entrantes de datos & 0,00 USD por GB \\ \hline
+                            \caption{ AWS tarifas de transferencia de datos entrante- precios.\label{long}}
+                        \end{longtable}
+                        
+                        
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Transferencia SALIENTE de datos} & {\bf Precio}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Transferencia SALIENTE de datos} & {\bf Precio}  \\ \hline
+                            \endhead
+                
+                            Hasta 1 GB/mes &	0,00 USD por GB  \\ \hline
+                            Siguientes 9,999 TB/mes &	0,09 USD por GB  \\ \hline
+                            Siguientes 40 TB/mes &	0,085 USD por GB  \\ \hline
+                            Siguientes 100 TB/mes &	0,07 USD por GB  \\ \hline
+                            Más de 150 TB/mes &	0,05 USD por GB \\ \hline
+                            \caption{AWS tarifas de transferencia de datos saliente- precios.\label{long}}
+                        \end{longtable}
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Tipo de instancia} & {\bf Precio}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Tipo de instancia} & {\bf Precio}  \\ \hline
+                            \endhead
+                            \multicolumn{2}{| c |}{Cuaderno de notas}\\ \hline
+                            
+                            t2.medium & 0,0464 USD \\ \hline
+                            t3.medium & 0,0582 USD \\ \hline
+                            \multicolumn{2}{| c |}{Entrenamiento e implementación}\\ \hline
+                
+                            m4.xlarge & 0,28 USD \\ \hline
+                            m5.xlarge & 0,269 USD \\ \hline
+                            
+                            \caption{AWS SageMaker tarifas por hora de tipos de instancias contempladas en la capa gratuita\label{long}}
+                        \end{longtable}
+                
+                        \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{6cm} |}
+                        
+                            \hline
+                            {\bf Procesamiento de datos} & {\bf Precio}  \\ \hline
+                            \endfirsthead
+                            
+                            \hline
+                            \multicolumn{2}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                            {\bf Procesamiento de datos} & {\bf Precio}  \\ \hline
+                            \endhead
+                
+                            Datos procesados ENTRANTES & 0,016 USD por GB \\ \hline
+                            Datos procesados SALIENTES & 0,016 USD por GB \\ \hline
+                            \caption{AWS SageMaker tarifas por GB de datos procesados\label{long}}
+                        \end{longtable}
+                        
+                        \item [Gastos]:
+                            \begin{longtable}[c]{| >{\centering\arraybackslash}m{6cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{2cm} |}
+                            
+                                \hline
+                                {\bf Servicio} & {\bf Meses} & {\bf Costo} & {\bf Total}  \\ \hline
+                                \endfirsthead
+                                
+                                \hline
+                                \multicolumn{4}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                                {\bf Servicio} & {\bf Meses} & {\bf Costo} & {\bf Total}  \\ \hline
+                                \endhead
+                                Luz & 8 & 400 & \$3,200\\ \hline
+                                Internet & 8 & 450 & \$3,600\\ \hline \hline
+                                \multicolumn{3}{| c |}{Total}&\$6,800\\ \hline
+
+                                \caption{Gastos\label{long}}
+                            \end{longtable}
+
+                    \end{description}
+                
+        \item[Total del proyecto]:
+            \begin{equation}
+                TP = CM + CH + G
+                \label{eq:EqEstimacionEsfuerzoHH}
+            \end{equation}
+            Sea:
+            \begin{itemize}
+                \item TP : Costo total del proyecto
+                \item G : Gastos totales
+                \item CH: Costo Humano
+                \item CM: Costo Material
+            \end{itemize}
+            Donde:
+            \begin{itemize}
+                \item G = \$6,800
+                \item CH = \$348,912
+                \item CM = \$59,300
+            \end{itemize}
+            Entonces:
+            \begin{equation}
+                TP = \$59,300 + \$348,912 + \$6,800
+            \end{equation}
+            Por lo tanto:
+            \begin{center}
+                TP = \$415,012
+            \end{center} 
+        \end{description}
+
+    \newpage
+    
+    \subsection{Análisis de riesgos}
+        Su objetivo es identificar los riesgos, es decir, su categoría, probabilidad de ocurrir e impacto en el proyecto.
+        \begin{longtable}[c]{| >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{6cm} |}
+                \hline
+                {\bf Gravedad} & {\bf Valor} & {\bf Descripción} \\ \hline
+                \endfirsthead
+                
+                \hline
+                \multicolumn{3}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+                {\bf Gravedad} & {\bf Valor} & {\bf Descripción}\\ \hline
+                \endhead
+                Alto riesgo & 3 & Provocaría el fracaso del proyecto.\\ \hline
+                Mediano riesgo & 2 & Mermaría la funcionalidad del proyecto.\\ \hline
+                bajo riesgo & 1 & Provocaría impactos mínimos en el proyecto.\\ \hline
+                \caption{Identificadores de riesgo.\label{long}}
+
+        \end{longtable}
+        \begin{longtable}[c]{| >{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{5cm} |>{\centering\arraybackslash}m{3cm} | >{\centering\arraybackslash}m{3cm} | >{\centering\arraybackslash}m{2cm} |}
+            \hline
+            
+            {\bf ID}&{\bf RIESGO}&{\bf CATEGORÍA}&{\bf PROBABILIDAD}&{\bf IMPACTO}\\ \hline
+            \endfirsthead
+            
+            \hline
+            \multicolumn{5}{| c |}{Continuación de la tabla: \ref{long}}\\ \hline
+            {\bf ID}&{\bf RIESGO}&{\bf CATEGORÍA}&{\bf PROBABILIDAD}&{\bf IMPACTO}\\ \hline
+            \endhead
+              
+            01 & Inexperiencia en las tecnologías para el desarrollo del sistema. & Técnico & 40\% & 1 \\ \hline
+            02 & Desintegración del equipo & Organizativo & 5\% & 2 \\ \hline
+            03 & Falta de coordinación entre los integrantes del equipo & Organizativo & 80\% & 3\\ \hline
+            04 & Retraso de los recursos lingüísticos & Organizativo & 40\% & 2\\ \hline
+            05 & Falta de los recursos lingüísticos & Organizativo  & 90\% & 3\\ \hline
+            06 & Ambigüedad de los recursos lingüísticos & Organizativo & 50\% & 2\\ \hline
+            07 & Documentación e información escasa o redundante & Externo & 20\% & 1\\ \hline
+            09 & Priorizar temas ajenos al proyecto & Organizativo & 90\% & 3\\ \hline
+    
+            \caption{Análisis de riesgo.\label{long}}
+
+        \end{longtable}
+  \newpage
+  \subsection{Planes de contingencia}
+        De los riesgos que se describieron previamente, es adecuado seguir un plan de contingencia y prevención en el sentido de que los riesgos no lleguen a ser obstáculo en el desarrollo del sistema y si llegan a ocurrir tener una forma de cómo disminuir el impacto que pudieran tener.
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+            
+            {\bf ID:} 01.\\ \hline
+
+            {\bf Descripción:} Los integrantes del equipo no cuentan con experiencia o conocimiento mínimo en las tecnologías para el desarrollo del proyecto. \\ \hline
+            
+            {\bf Contexto}: Debido a la gran variedad de tecnologías que se ocuparan a lo largo del desarrollo del proyecto, algunas cuya integración es indispensable, es necesario contar con cierto grado de conocimiento o experiencia para el manejo de la misma. \\  \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Revisar documentación.
+                    \item Pruebas de concepto.
+                    \item Ejemplos de uso.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 01.}
+        
+        \end{longtable}
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+
+        
+            {\bf ID:} 02. \\ \hline
+
+            {\bf Descripción:} Algún integrante del equipo abandona el proyecto. \\ \hline
+            
+            {\bf Contexto}: Sea un factor personal u externo, un miembro del equipo decide abandonar el proyecto dando como lugar a una reorganización de las tareas. \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item El integrante debe seguir las buenas practicas de desarrollo necesarias para que algún otro miembro pueda continuar con sus tareas.
+                    \item Re-organización adecuada.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 02.}
+        
+        \end{longtable}
+\newpage
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+
+            {\bf ID:} 03. \\ \hline
+
+            {\bf Descripción:} Mala coordinación entre los integrantes del proyecto para las sesiones de trabajo \\ \hline
+            
+            {\bf Contexto}: La mala coordinación puede derivar en una serie de mal entendidos, entorpecimiento de tareas, retrasos considerables de tiempo, etc. \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Acordar un espacio de tiempo para resolver dudas.
+                    \item Dar a conocer las actividades que cada integrante esta realizando.
+                    \item Mayor comunicación entre los integrantes.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 03.}
+        
+        \end{longtable}
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+
+            {\bf ID:} 04. \\ \hline
+
+            {\bf Descripción:} Retraso en la obtención de recursos lingüísticos necesarios para poder llevar a cabo el proyecto. \\ \hline
+            
+            {\bf Contexto}: Pudiera darse el caso en que los permisos para poder obtener los recursos lingüísticos necesarios llegaran a retrasarse. \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Buscar un {\textit{corpus}} externo con licencia para su uso.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 04.}
+        
+        \end{longtable}
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+
+            {\bf ID:} 05. \\ \hline
+
+            {\bf Descripción:} Falta de recursos lingüísticos \\ \hline
+            
+            {\bf Contexto}: Se da el caso de que la información obtenida de una fuente de datos no sea suficiente. \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Buscar un {\textit{corpus}} externo con licencia para su uso.
+                    \item Utilizar herramientas como {\textbf BERT}.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 05.}
+        
+        \end{longtable}
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+        
+            {\bf ID:} 06. \\ \hline
+
+            {\bf Descripción:} Ambigüedad de los recursos lingüísticos obtenidos. \\ \hline
+            
+            {\bf Contexto}: Los recursos lingüísticos obtenidos son ambiguos y dificultan la correcta funcionalidad del proyecto. \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Buscar un {\textit{corpus}} externo con licencia para su uso.
+                    \item Utilizar herramientas como {\textbf BERT}.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 06.}
+        
+        \end{longtable}
+        
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+
+        
+            {\bf ID:} 07. \\ \hline
+
+            {\bf Descripción:} Documentación e información escasa \\ \hline
+            
+            {\bf Contexto}: Debido a la variedad tecnológica, librerías y la complejidad que este proyecto demanda, será de indispensable necesidad la adecuada documentación por parte de los desarrolladores de las tecnologías a utilizar \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Revisar a detalle la documentación oficial proveída por el desarrollador de la tecnología
+                    \item Revisar los ejemplos de la implementación de la tecnología
+                    \item Seguir las buenas practicas
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 07.}
+        
+        \end{longtable}
+        
+        
+        \begin{longtable}[l]{| >{\arraybackslash}m{16.5cm} |}
+
+            \hline
+            {Hoja de información del riesgo}\\  \hline
+            \endfirsthead
+            
+            \hline
+            {Hoja de información del riesgo}\\ \hline
+            \endhead
+
+            {\bf ID:} 09. \\ \hline
+
+            {\bf Descripción:} Priorizar temas ajenos al proyecto. \\ \hline
+            
+            {\bf Contexto}: Sean temas académicos, personales o profesionales, los integrantes del equipo no le dan la importancia necesaria al desarrollo del sistema. \\ \hline
+            
+            {\bf Mitigación:}
+                \begin{itemize}
+                    \item Respetar los tiempos de desarrollo.
+                    \item Mantener informados a los miembros del equipo.
+                \end{itemize}
+            \\ \hline
+
+            \caption{Plan de contingencia correspondiente al riesgo 09.}
+        
+        \end{longtable}
