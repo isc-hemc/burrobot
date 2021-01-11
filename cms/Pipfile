@@ -19,6 +19,7 @@ pylint-django = "*"
 [packages]
 django = "~=2.2.0"
 djangorestframework = "~=3.10.0"
+mysqlclient = "*"
 
 [requires]
 python_version = "3.8"
