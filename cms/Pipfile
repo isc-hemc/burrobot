@@ -14,6 +14,7 @@ pre-commit = "*"
 black = "==19.3b0"
 flake8 = "*"
 faker = "==5.0.0"
+pylint-django = "*"
 
 [packages]
 django = "~=2.2.0"
