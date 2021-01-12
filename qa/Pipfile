@@ -19,10 +19,9 @@ torch = "==1.7.1"
 transformers = "==4.1.1"
 flask = "*"
 python-dotenv = "*"
-flask-restplus = "*"
-uwsgi = "*"
 flask-restful = "*"
 responses = "*"
+uwsgi = "*"
 
 [requires]
 python_version = "3.8"
