@@ -85,6 +85,15 @@ If everything goes well, you should see a similar response:
 }
 ```
 
+### uWSGI
+
+Make sure you have installed on your machine the uWSGI server for production deploys as well as the python uwsgi library:
+
+> For MacOS:
+```bash
+brew install uwsgi
+```
+
 ## Authors
 
 ***David Martinez** - [Davestring](https://github.com/Davestring)
