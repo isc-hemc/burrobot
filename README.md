@@ -21,7 +21,7 @@
 
 Before start diving in, the project it's defined in different modules:
 
-- qa: stores a Flask API that which turns out to be the the Burrobot service itself. This API as a pretrained model using transformers and BERT.
+- qa: stores a Flask API that turns out to be the Burrobot service itself. This API has a pretrained model using transformers and BERT.
 - cms: stores a Django API that will be used to update prone to changes information such as dates or any other business data.
 - docs: stores everything that has to with the **thesis**, the investigation behind it and the results.
 - mongo: holds the [MongoDB](#mongodb) configuration that Docker needs to run it properly, customly and safely. In here we will store the raw messages comming from the Facebook API.
