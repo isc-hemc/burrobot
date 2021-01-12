@@ -66,13 +66,17 @@ class BurrobotResource(Resource):
                 message="context_id or question keys required."
             ).error()
 
-        cms_api = os.environ.get("CMS_API")
-        res = http_request.get(f"{cms_api}/context/{context_id}").json()
+        cms_api = os.environ.get("CMS_API_HOST")
+
+        try:
+            res = http_request.get(f"{cms_api}/context/{context_id}").json()
+        except Exception:
+            return CustomResponse(
+                message="Unable to reach the CMS API."
+            ).error(404)
 
         context = res["data"]["description"]
 
         answer = self.qa(context=context, question=question)
 
-        return CustomResponse(
-            message="Burrobot dice:", data=answer["answer"]
-        ).success()
+        return CustomResponse(message="Burrobot says:", data=answer).success()
