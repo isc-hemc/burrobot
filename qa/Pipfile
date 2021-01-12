@@ -1,0 +1,28 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pycodestyle = "*"
+pylint = "*"
+mypy = "*"
+pyflakes = "*"
+bandit = "*"
+pydocstyle = "*"
+pre-commit = "*"
+black = "==19.3b0"
+flake8 = "*"
+
+[packages]
+torch = "==1.7.1"
+transformers = "==4.1.1"
+flask = "*"
+python-dotenv = "*"
+flask-restplus = "*"
+uwsgi = "*"
+flask-restful = "*"
+responses = "*"
+
+[requires]
+python_version = "3.8"

@@ -21,9 +21,11 @@
 
 Before start diving in, the project it's defined in different modules:
 
-- documentation: stores everything that has to with the **thesis**, this module supports the research and findings.
-- mongo: holds the [MongoDB](#mongodb) configuration that Docker needs to run it properly, customly and safely.
-- mysql: holds the [MySQL](#mysql) configuration that Docker needs to run it properly, customly and safely.
+- cms: stores a Django API that will be used to update prone to changes information such as dates or any other business data.
+- docs: stores everything that has to with the **thesis**, the investigation behind it and the results.
+- mongo: holds the [MongoDB](#mongodb) configuration that Docker needs to run it properly, customly and safely. In here we will store the raw messages comming from the Facebook API.
+- mysql: holds the [MySQL](#mysql) configuration that Docker needs to run it properly, customly and safely. In here we will store the normalized information of the messages that we previously store in [mongo](./mongo) with the purpose of use it to calculate information such as most important topics and plot them to evaluated which ones the community are talking about.
+- nlp: this module is dedicated to Natural Language Processing tasks. In here we implement the normalization, topics analysis, LDA and plot tasks.
 - scraper: as its name says, holds the implementation of a *scraper* to download facebook messages from a profile thanks to Facebook's Graph API.
 
 ## Configuration
