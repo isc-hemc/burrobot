@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "API: Run",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "preLaunchTask": "Set_DOTENV",
+            "args": [],
+            "django": true
+        }
+    ]
+}
