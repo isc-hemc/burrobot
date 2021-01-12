@@ -1,0 +1,31 @@
+{
+    "[python]": {
+      "editor.formatOnPaste": true,
+      "editor.formatOnSave": true
+    },
+
+    "editor.rulers": [
+      80,
+      120
+    ],
+  
+    "python.pythonPath": "/Users/davidmartinez/.local/share/virtualenvs/qa-0YFJq1l9/bin/python",
+
+    "python.formatting.provider": "black",
+
+    "python.linting.pylintArgs": [],
+    "python.formatting.blackArgs": [
+      "--line-length",
+      "79"
+    ],
+
+    "python.linting.pydocstyleEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.linting.banditEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pylintEnabled": true,
+    
+    "python.linting.flake8Path": "pyflakes",
+    "python.linting.pycodestylePath": "pycodestyle"
+}
