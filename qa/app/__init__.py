@@ -1,3 +1,3 @@
 """app package initializer."""
 
-from app.service import app
+from app.service import application
