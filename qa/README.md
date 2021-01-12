@@ -13,7 +13,7 @@
 
 ![Python 3.8](https://img.shields.io/badge/Python-3.8-blue.svg)
 ![Flask 1.1.2](https://img.shields.io/badge/Flask-1.1.2-black.svg)
-![Flask RESTful 3.10.0](https://img.shields.io/badge/Flask-RESTful-0.3.8-green.svg)
+![Flask RESTful 3.10.0](https://img.shields.io/badge/FlaskRESTful-0.3.8-green.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-1.7.1-red.svg)
 ![Transformers 4.1.1](https://img.shields.io/badge/Transformers-4.1.1-yellow.svg)
 
