@@ -17,7 +17,7 @@ faker = "==5.0.0"
 pylint-django = "*"
 
 [packages]
-django = "~=2.2.0"
+django = "~=2.2.18"
 djangorestframework = "~=3.10.0"
 mysqlclient = "*"
 
